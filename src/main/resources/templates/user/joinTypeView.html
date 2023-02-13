@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+	<head>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" type="text/css" th:href="@{/css/joinTypeView.css}">
+		</th:block>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				$(function(){
+					$("#btnJoinGeneral").on("click", function(){
+						location.href = '/user/joinView';
+					});			
+				});
+			</script>
+		</th:block>
+	</head>
+		
+	<body>
+		<div layout:fragment="content">
+			<div id="total_joinView">
+			    <div id="joinView_box">
+			      <p id="joinView_title">곰곰이 회원가입</p>
+			      <div id="btns_joinView">  
+			        <div id="joinView_join">
+			          <button type="button" id="btnJoinGeneral">일반 회원가입</button>
+			        </div>
+			        <div id="joinView_kakao">
+			          <a th:href="@{/oauth2/authorization/kakao}" id="btnJoinKakao">
+			            <img src="/images/kakao_login.png" width="300px" height="40px">
+			          </a>
+			        </div>
+			        <!-- 네이버 숨김 처리 -->
+			        <div id="joinView_naver" style="display: none;">
+			          <a th:href="@{#}" id="btnJoinNaver">
+			            <img src="/images/naver_login.png" width="300px" height="40px">
+			          </a>
+			        </div>
+			      </div>
+			    </div> 
+			</div>
+		</div>
+	</body>
+</html>

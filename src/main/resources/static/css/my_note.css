@@ -1,0 +1,91 @@
+
+/* *** CONTENT PART *** */
+#content_mypage {
+	width: 1000px;
+	padding: 30px 30px 30px 60px;
+	float: left;
+}
+
+.noteContainer {
+	width: 960px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.eachNote {
+	width: 230px;
+	position: relative;
+}
+.memoImg {
+	width: 240px;
+}
+.eachContent {
+	z-index: 2;
+	position: absolute;
+	width: 210px; height: 203px;
+	flex-basis: auto;
+	top: 6%;
+	left: 5%;
+	z-index: 1;
+    /*display:inline-block;*/
+    /*border: 1px solid #D8C6A6;*/
+    /*background-color: #D8C6A6;*/
+    padding: 8px;
+}
+.eachContent > button {
+	z-index: 2;
+	position: absolute;
+	border: none;
+	font-weight: bold;
+	background-color: beige;
+	font-size: 22px;
+	top: 94%;
+	left: 90.5%;
+}
+.noteContent {
+	overflow:hidden;
+	text-overflow:ellipsis; 
+	white-space:normal;
+	word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 8 ;
+    -webkit-box-orient: vertical;
+    text-align: left;
+}
+
+.btnContainer {
+	float: left;
+	margin-bottom: 14px;
+}
+.btnContainer > button {
+	width: 100px; height: 32px;
+	text-decoration: none;
+	border: 1px solid #D8C6A6;
+	border-radius: 5px;
+	background-color: #B5A27F;
+	font-weight: bold;
+	color: #f5f5f5;
+}
+
+.detailNote {
+	z-index: 1;
+    position: absolute;
+    display: none;
+    background-color: #fefefe;
+    top:15%;
+    left:45%;
+    margin: 15% auto;
+    padding: 20px;
+    width: 350px;
+    height: 370px;
+    overflow: hidden;
+    border: 1px solid #B5A27F; border-radius: 5px;
+    text-align: center;
+}
+
+.btnDetailContainer > button {
+	border: none;
+	
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+	<head>
+		<th:block layout:fragment="css">	
+			<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">				
+		</th:block>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+			 		//바디가 다 읽히기 전에 
+					const currentUser = /*[[${#authentication.principal}]]*/;
+					
+					if(currentUser != 'anonymousUser') {
+						location.href = "/planner/planMain";
+					}
+					
+				$(function(){
+					
+					/* 로그인 실패시 에러 메세지 */
+					const url = new URL(window.location.href);
+					
+					const urlParams = url.searchParams;
+					
+					if(urlParams.get("error")){
+						alert(urlParams.get("errorMsg"));
+						location.href="/user/loginView";
+					}
+					
+					/* 비밀번호확인 내용 보여주기 (눈 이미지 클릭했을 때 글자보여주기) */
+					$("#img_pw_wrap02 img").on("click", function(){
+						$("#login_pw").toggleClass("active");
+
+						console.log(document.getElementById("login_pw").classList);
+						if($("#login_pw").hasClass("active")){
+							$(this).parent().prev().attr("type", "text");
+							$("#img_eye02").hide();
+							$("#img_eye01").show();
+						} else {
+							$(this).parent().prev().attr("type", "password");
+							$("#img_eye01").hide();
+							$("#img_eye02").show();
+						}
+						
+					});
+					
+					/*회원가입정보 작성 페이지로 이동*/
+					$("#btnJoin_real").on("click", function(){
+						location.href = '/user/joinView';
+					});	
+					
+				});
+			</script>
+		</th:block>
+	</head>
+		
+	<body>
+		<div layout:fragment="content">
+		  <div id="total_loginView">
+		    <div id="login_box">
+		      <form id="loginForm" action="/user/loginProc" method="post">
+		      <input type="hidden" id="errorMsg" th:value="${param.errorMsg}"> 
+		        <p id="login_title">곰곰이 로그인</p>
+		        <div id="login_wrap">
+		          <div id="login_section01">
+		            <div id="img_id_wrap">
+		              <img src="/images/userid.png" id="img_id">
+		            </div>
+		            <input type="text" name="userId" id="login_id" placeholder="아이디">
+		          </div>
+		          <div id="login_section02">
+		            <div id="img_pw_wrap01">
+		              <img src="/images/userpw.png" id="img_pw">
+		            </div>
+		            <input type="password" name="userPw" id="login_pw" placeholder="비밀번호">
+		            <div id="img_pw_wrap02">
+		              <img src="/images/eye02.png" id="img_eye02">
+		              <img src="/images/eye01.png" id="img_eye01">
+		            </div>
+		          </div>
+		          <div id="login_section03">
+		            <button type="submit" id="btnLogin_real" >곰곰이 로그인</button>
+		          </div>
+		          <div id="login_kakao">
+		            <a th:href="@{/oauth2/authorization/kakao}" id="btnLoginKakao">
+		              <img src="/images/kakao_login.png" width="300px" height="40px">
+		            </a>
+		          </div>
+		          <!-- 네이버 숨김 처리 -->
+		          <div id="login_naver" style="display:none;">
+		            <a th:href="@{#}" id="btnLoginNaver">
+		              <img src="/images/naver_login.png" width="300px" height="40px">
+		            </a>
+		          </div>	
+		        </div>					
+		      </form>	  	
+		    </div>
+		    <div id="find_join_box">
+		      <div id="find_box">
+		        <div id="find_wrap_id"> 
+		          <a th:href="@{/user/findIdView/0}" id="find_id">아이디 찾기</a>
+		        </div>
+		        <div id="find_wrap_pw">
+		          <a th:href="@{/user/findIdView/1}"  id="find_pw">비밀번호 찾기</a>
+		        </div>
+		      </div>
+		      <div id="login_join">
+		        <button type="button" id="btnJoin_real">회원가입</button>
+		      </div>  
+		    </div>
+		  </div>  
+		</div>
+	</body>
+</html>

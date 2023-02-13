@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko"
+   xmlns:th="http://www.thymeleaf.org"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{layouts/layout}">
+   
+
+   <!-- head 영역 시작 -->
+   <!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+   <head>
+      <th:block layout:fragment="css">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+         <link rel="stylesheet" th:href="@{/css/cscenter_notice.css}">
+      </th:block>
+      <th:block layout:fragment="script">
+         <script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+         <script th:src="@{/js/main.js}"></script>
+      </th:block>
+   </head>
+   <!-- head 영역 끝 -->
+   
+   <body>   
+   
+   <div layout:fragment="content"  id="wrap">
+    <div id="inquiry">
+        <div class="wrap">
+            <div class="title">공지사항</div>
+            <div class="form">
+                <ul>
+                    <li>
+                        <dl class="w33p">
+                            <dt>작성자</dt>
+                            <dd> <input type="text" value="${noticeAdmin}" style="border: none;" readonly></dd>
+                        </dl>
+                        <dl class="w33p">
+                            <dt>등록일</dt>
+                            <dd><input type="text" value="${noticeRegdate}" style="border: none;" readonly></dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl class="w66p">
+                            <dt>제목</dt>
+                            <dd><input type="text" value="${noticeTitle}" style="border: none;" readonly></dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl class="w100p">
+                            <dt>내용</dt>
+                            <dd><input type="text" value="${noticeContent}" style="border: none;" id="content" readonly></dd>
+                        </dl>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="button">
+               
+                <div class="fr">                
+                    <a href="/customercenter/cscenter_noticelist.html" class="btn btn_01 modalOpen" data-modal="pop_report">목록으로 돌아가기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>  
+    
+ 
+</body>
+
+   
+   
+   
+</html>

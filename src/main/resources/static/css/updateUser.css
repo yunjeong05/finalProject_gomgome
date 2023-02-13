@@ -1,0 +1,197 @@
+#total_update {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#update_box{
+	margin: 80px auto;
+}
+
+.update_label_wrapper{
+  color: #B6A27F;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#PwValidation, #pwCheckResult {
+  margin-top: 5px;
+}
+
+#update_section01 {
+	display:flex;
+	position: relative;
+}
+
+
+#update_img01_eye02{
+  position: absolute;
+  width: 20px;
+  top: 15px;
+  left: 275px;       
+}
+
+#update_img01_eye01{
+  display: none;
+  position: absolute;
+  width: 20px;
+  top: 15px;
+  left: 275px; 
+}
+
+#update_section02{
+	display:flex;
+	position: relative;
+}
+
+#update_img02_eye02{
+  position: absolute;
+  width: 20px;
+  top: 15px;
+  left: 275px; 
+}
+
+#update_img02_eye01{
+  display: none;
+  position: absolute;
+  width: 20px;
+  top: 15px;
+  left: 275px;	
+}
+
+#update_userGender_box input[type='radio']{
+  accent-color:#333;
+  border: 2px solid #808080;
+}
+
+.update_userGender_radio{
+  margin-top: 10px;
+  color: #B5A27F;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#update_birthday_box{
+  margin: 10px auto 10px auto;
+  color: #B5A27F;
+  font-weight: bold;
+}
+
+#update_interest_box{
+  margin-top: 10px;	
+}
+
+#update_interest_box span{
+  margin-right: 15px;
+}
+
+#update_interest_box label {
+  color: #B5A27F;
+  font-weight: bold;	
+}
+
+#update_btns{
+  margin: 20px auto 50px auto;
+}
+
+#btnOut{
+ margin-right: 5px;
+ width: 145px;
+ height: 40px;
+ border: 1px solid #B5A27F;
+ border-radius: 5px;
+ background:#FFF;
+ color:#B5A27F;
+ font-weight:bold;
+}
+
+#btnUpdate{
+  width: 145px;
+  height: 40px;
+  border: 1px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+  color:#FFF;
+  font-weight:bold;
+}
+
+/* 수정완료 알림 모달 CSS */
+
+.updateInfoModal_box{
+  border : 1px solid #B5A27F;
+  border-radius : 5px;
+}
+
+.updateInfoModal_top{
+ width: 500px;
+ height: 40px;
+ background-color: #B5A27F;
+}
+
+.updateInfoModal_body{
+ margin: 40px auto 20px auto;
+ text-align: center;
+ font-weight: bold;
+}
+
+.updateInfoModal_body p {
+  font-size: 1.1rem;
+}
+
+.updateInfoModalModal_footer{
+  justify-content: center;
+  border: none;
+}
+
+.btnUpdateInfoCheck{
+  width: 150px;
+  height: 40px;
+  margin-bottom: 30px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 1px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+  align-items: center;
+}
+
+/* 탈퇴완료 알림 모달 CSS */
+.outModal_box{
+  border : 1px solid #B5A27F;
+  border-radius : 5px;
+}
+
+.outModal_top{
+ width: 500px;
+ height: 40px;
+ background-color: #B5A27F;
+}
+
+.outModal_body{
+ margin: 40px auto 20px auto;
+ text-align: center;
+ font-weight: bold;
+}
+
+.outModal_body p {
+  font-size: 1.1rem;
+}
+
+.outModal_footer{
+  justify-content: center;
+  border: none;
+}
+
+.btnOutCheck, .btnCancelOut{
+  width: 150px;
+  height: 40px;
+  margin-bottom: 30px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 1px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+  align-items: center;
+}

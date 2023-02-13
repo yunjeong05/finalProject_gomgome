@@ -1,0 +1,77 @@
+#totalSearch {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+    letter-spacing: -1px;
+}
+.search-title {
+    display: flex;
+    margin-bottom: 50px;
+}
+.search-main-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.search-sub-title {
+    font-size: 1.3rem;
+    line-height: 200%;
+    font-weight: bold;
+    color: #404040;
+}
+.search-result-wrapper {
+    margin-bottom: 50px;
+}
+.search-content-title {
+    padding: 5px 0px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom:1px solid #333333;
+}
+.search-content-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+  .search-content-subtitle>span {
+    color:#b5a27f
+}
+.search-more {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #ffffff;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #b5a27f;
+    font-weight:bold;
+}
+.search-result-detail {
+    padding-top: 5px;
+    padding-bottom: 30px;
+}
+.seach-userInfo {
+    display: flex;
+    margin-left: -5px;
+}
+.search-user-img {
+    width: 35px;
+}
+.search-user-name, .search-user-date{
+    line-height: 35px;
+    margin-left: 5px;
+}
+.search-subtitle {
+    font-size: 1.5rem;
+    margin: 10px 0 15px 0;
+}
+.search-content-detail {
+    font-size: 1.2rem;
+    color: #333333;
+    line-height: 150%;
+  	text-align: justify;
+}
+
+.textNone {
+	margin-top: 15px;
+    font-size: 1.05rem;
+    color: #333333;	
+}

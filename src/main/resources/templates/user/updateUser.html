@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+	<head>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" type="text/css" th:href="@{/css/updateUser.css}">
+		</th:block>
+		<th:block layout:fragment="script">
+			<script th:src="@{/js/updateUser.js}"></script>
+		</th:block>
+	</head>
+		
+	<body>
+		<div layout:fragment="content">
+		  <div id="total_update">
+		    <form id="updateForm" action="/user/updateUserInfo" method="post">
+		      <input type="hidden" name="userBirthday" id="userBirthday">
+		      <input type="hidden" name="cateArray" id="cateArray">
+		      <input type="hidden" name="userEmail" id="emailArray">
+		      <input type="hidden" th:value="${userInfo.userDelete}" name="userDelete" id="userDelete">  		
+		      <input type="hidden" th:value="${userInfo.userRegdate}" name="userRegdate">
+		      <input type="hidden" th:value="${userInfo.userReportCnt}" name="userReportCnt">
+		      <input type="hidden" th:value="${userInfo.userRole}" name="userRole">
+		      <input type="hidden" th:value="${userInfo.userStatus}" name="userStatus">
+		      <input type="hidden" th:value="${userInfo.userPlannerTotal}" name="userPlannerTotal">
+		      <input type="hidden" th:value="${userInfo.userStudyhourDate}" name="userStudyhourDate">
+		      <input type="hidden" th:value="${userInfo.userStudyhourTotal}" name="userStudyhourTotal">
+		      <div id="update_box">
+		        <div class="update_label_wrapper">
+		          <label for="userId">아이디</label>
+		        </div>
+		        <div>
+		          <input type="text" id="userId" name="userId" th:value="${userInfo.userId}" readonly>
+		        </div>
+		        <div class="update_label_wrapper">
+		          <label for="userPw">비밀번호</label>
+		        </div>
+		        <div id="update_section01">
+		          <input type="password" id="userPw" name="userPw" placeholder="비밀번호를 입력하시오">
+		          <div id="update_img_pw_wrap01">
+		            <img src="/images/eye02.png" id="update_img01_eye02">
+		            <img src="/images/eye01.png" id="update_img01_eye01">
+		          </div>
+		        </div>
+		        <p id="pwValidation" style="color: red; font-size: 0.8rem;">
+		          비밀번호는 대소문자, 숫자, 기호(!@#$%^&*) 포함 6글자 이상으로 설정해주세요. 
+		        </p>
+		        <div class="update_label_wrapper">
+		          <label for="userPwCheck">비밀번호 확인</label>
+		        </div>
+		        <div id="update_section02">
+		          <input type="password" id="userPwCheck" name="userPwCheck" placeholder="비밀번호를 다시 입력 하시오.">
+		          <div id="update_img_pw_wrap02">
+		            <img src="/images/eye02.png" id="update_img02_eye02">
+		            <img src="/images/eye01.png" id="update_img02_eye01">
+		          </div>
+		        </div>
+		        <p id="pwCheckResult" style="font-size: 0.8rem;"></p>
+		        <div class="update_label_wrapper">
+		          <label for="userName">이름</label>
+		        </div>
+		        <input type="text" id="userName" name="userName" th:value="${userInfo.userName}" readonly>
+		        <div class="update_label_wrapper">
+		          <label for="userNickname">닉네임</label>
+		        </div>
+		        <div>
+		          <input type="text" id="userNickname" name="userNickname" th:value="${userInfo.userNickname}" readonly>
+		        <div id="update_userGender_box"  class="update_label_wrapper">
+		          <div class="update_userGender_box">
+		            <label for="userGender">성별</label>
+		          </div>
+		          <div class="update_userGender_radio">
+		            <input type="radio" id="male" name="userGender" value="male" th:checked="${userInfo.userGender == 'male'}">&ensp;<label for="male">남자</label>&ensp;
+		            <input type="radio" id="female" name="userGender" value="female" th:checked="${userInfo.userGender == 'female'}">&ensp;<label for="female">여자</label>
+		          </div>
+		        </div>
+		        <div class="update_label_wrapper">
+		          <label for="update_birthday_box">생년월일</label>
+		        </div>
+		        <div id="update_birthday_box">
+		        <input type="hidden" id="userBirth" th:value="${userInfo.userBirthday}">
+		          <select name="yy" id="year"></select>년 
+		          <select name="mm" id="month"></select>월
+		          <select name="dd" id="day"></select>일 
+		        </div>
+		        <div class="update_label_wrapper">
+		          <label for="userTel">전화번호</label>
+		        </div>
+		        <input type="text" id="userTel" name="userTel" th:value="${userInfo.userTel}">
+		        <div class="update_label_wrapper">
+		        <label for="str_email01">이메일</label>
+		      </div>
+		      <input type="text" id="str_email01" name="str_email01" th:value="${#strings.arraySplit(userInfo.userEmail, '@')[0]}"><span id="str_email02"> @</span>
+		      <input type="text" name="str_email03" id="str_email03" th:value="${#strings.arraySplit(userInfo.userEmail, '@')[1]}">
+		      <select name="selectEmail" id="selectEmail" th:value="${#strings.arraySplit(userInfo.userEmail, '@')[1]}">
+		        <option value="1" disabled selected>이메일선택</option>
+		        <option value="naver.com" name="email" th:selected="${#strings.arraySplit(userInfo.userEmail, '@')[1] == 'naver.com'}">naver.com</option>
+		        <option value="daum.net" name="email" th:selected="${#strings.arraySplit(userInfo.userEmail, '@')[1] == 'daum.net'}">daum.net</option>
+		        <option value="gmail.com" name="email" th:selected="${#strings.arraySplit(userInfo.userEmail, '@')[1] == 'gmail.com'}">gmail.com</option>
+		        <option value="2" name="email" th:selected="${#strings.arraySplit(userInfo.userEmail, '@')[1] != 'gmail.com' && 
+		      									#strings.arraySplit(userInfo.userEmail, '@')[1] != 'daum.net' &&
+		      									#strings.arraySplit(userInfo.userEmail, '@')[1] != 'naver.com' 
+		      									}">직접입력</option>
+		      </select>
+		      <p id="join_email_text">아이디, 비밀번호를 찾기위해 사용되니 정확하게 입력해주십시오.</p>
+		      <p id="emailCheckResult">이메일형식(com, net)에 맞지 않습니다. 다시 작성해주세요.</p>
+		      <div class="update_label_wrapper">
+		        <label for="userInterest">관심사</label>
+		      </div>
+		      <div id="update_interest_box">
+		      	  	<span th:each="cateInfo : ${cateInfoList}">
+				      	<input type="checkbox" name="maincategoryNo" id="'category' + ${cateInfo.maincategoryNo}" 
+				      		   th:value="${cateInfo.maincategoryNo}" th:checked="${cateInfo.userId != null}">
+				    	<label for="'category' + ${cateInfo.maincategoryNo}" th:text="${cateInfo.maincategoryName}"></label>
+		      	  </span>
+			      <!--<input type="checkbox" name="maincategoryNo" id="update_study" value="2"><label for="update_study">자기개발&emsp;</label>
+			      <input type="checkbox" name="maincategoryNo" id="update_hobby" value="3"><label for="update_hobby">취미&emsp;</label>
+			      <input type="checkbox" name="maincategoryNo" id="update_exrcise" value="4"><label for="update_exrcise">운동&emsp;</label>-->
+		      </div>
+		      <div id="update_btns">
+		        <button type="button" id="btnOut">탈퇴하기</button>
+		        <button type="button" id="btnUpdate">수정하기</button>
+		      </div>
+		      </div>
+		    </form>
+		  </div>	
+		</div>
+		<!--수정성공 모달 --> 
+		  <div id="myModal" class="modal fade ModalBox updateInfoModal" tabindex="-1">
+		    <div class="modal-dialog">
+		        <div class="modal-content updateInfoModal_box">
+		            <div class="modal-header updateInfoModal_top">
+		                <h5 class="modal-title"></h5>
+		                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		            </div>
+		            <div class="modal-body updateInfoModal_body">
+		                <p>수정완료되었습니다.</p>
+		            </div>
+		            <div class="modal-footer updateInfoModalModal_footer">
+		                <button type="button" class="btnUpdateInfoCheck">확 인</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>	
+		<!--탈퇴성공 모달 -->
+		  <div id="myModal" class="modal fade ModalBox outModal" tabindex="-1">
+		    <div class="modal-dialog">
+		        <div class="modal-content outModal_box">
+		            <div class="modal-header outModal_top">
+		                <h5 class="modal-title"></h5>
+		                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		            </div>
+		            <div class="modal-body outModal_body">
+		                <p>정말 탈퇴하시겠습니까?</p>
+		            </div>
+		            <div class="modal-footer outModal_footer">
+		              <button type="button" class="btn btn-secondary btnCancelOut" data-bs-dismiss="modal">Cancel</button>
+		              <button type="button" class="btnOutCheck">확 인</button>
+		            </div>
+		        </div>
+		    </div>
+		</div> 			
+	</body>
+</html>

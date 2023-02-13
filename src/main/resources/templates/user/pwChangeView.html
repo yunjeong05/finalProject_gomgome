@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+	<head>
+		<th:block layout:fragment="css">	
+			<link rel="stylesheet" type="text/css" th:href="@{/css/pwChangeView.css}">
+			<style>
+			</style>
+		</th:block>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				$(function(){
+					/*비밀번호 유효성검사*/
+					var pwValidation = false; 
+					var pwCheck = false;
+					
+					$("#pwValidation").hide();
+					$("#pwCheckResult").hide();
+										
+		
+					function validatePassword(character){
+						return /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{6,}$/.test(character);
+					}
+					
+					/* 비밀번호 입력 될 때 마다 유효성 검사*/
+					$("#userPw").on("change", function(){
+						// 비밀번호 유효성 처리 
+						if(!validatePassword($("#userPw").val())){
+							pwValidation = false;
+							$("#pwValidation").show();
+							//$("#userPw").focus();
+						} else {
+							pwValidation = true;
+							$("#pwValidation").hide();
+						}
+						
+						// 비밀번호 확인까지 입력 후 다시 비밀번호 재설정 
+						if($("#userPw").val() == $("#userPwCheck").val()){
+							pwCheck = true; 
+							$("#pwCheckResult").css("color", "green");
+							$("#pwCheckResult").text("비밀번호가 일치합니다.");
+						} else {
+							pwCheck = false; 
+							$("#pwCheckResult").css("color", "red");
+							$("#pwCheckResult").text("비밀번호가 일치하지 않습니다.");
+						}
+					});
+					
+					/* 비밀번호 확인란 입력할 때 일치여부 체크*/
+					$("#userPwCheck").on("change", function(){
+						$("#pwCheckResult").show();
+						
+						if($("#userPw").val() == $("#userPwCheck").val()){
+							pwCheck = true;
+							$("#pwCheckResult").css("color", "green");
+							$("#pwCheckResult").text("비밀번호가 일치합니다.");
+						} else {
+							pwCheck = false;
+							$("#pwCheckResult").css("color", "red");
+							$("#pwCheckResult").text("비밀번호가 일치하지 않습니다.");
+						}
+					});
+					
+					/* '비밀번호' 내용 보여주기 (눈 이미지 클릭했을 때 글자보여주기) */
+					$("#join_img_pw_wrap01 img").on("click", function(){
+						$("#userPw").toggleClass("active");
+				
+						console.log(document.getElementById("userPw").classList);
+						
+						if($("#userPw").hasClass("active")){
+							$(this).parent().prev().attr("type", "text");
+							$("#join_img01_eye02").hide();
+							$("#join_img01_eye01").show();
+						} else {
+							$(this).parent().prev().attr("type", "password");
+							$("#join_img01_eye01").hide();
+							$("#join_img01_eye02").show();
+						}
+						
+					});
+					
+					/* '비밀번호확인' 내용 보여주기 (눈 이미지 클릭했을 때 글자보여주기) */
+					$("#join_img_pw_wrap02 img").on("click", function(){
+						$("#userPwCheck").toggleClass("active");
+				
+						if($("#userPwCheck").hasClass("active")){
+							$(this).parent().prev().attr("type", "text");
+							$("#join_img02_eye02").hide();
+							$("#join_img02_eye01").show();
+						} else {
+							$(this).parent().prev().attr("type", "password");
+							$("#join_img02_eye01").hide();
+							$("#join_img02_eye02").show();
+						}
+						
+					});
+					
+					/* 비밀번호 변경 성공 후에 로그인 페이지로 이동 */
+					$("#btnPwChange").on("click",function(){
+						if($("#userPw").val() != ""  && $("#userPwCheck").val() !="") {
+							$.ajax({
+								url:'/user/pwChange',
+								type: 'post', 
+								data: {
+									userId: $("#userId").val(),
+									userPw: $("#userPw").val()
+								},
+								success: function(obj){
+									console.log(obj);
+									if(obj.item.updateMsg == "1" ){
+										alert("비밀번호 변경 되었습니다.");
+										location.href="/user/loginView";
+										
+									} else {
+										alert("비밀번호 변경에 실패하였습니다. 관리자에게 문의하세요.");
+										return; // 함수를 끝 종료 시킴
+									}
+								},
+								error: function(e){
+									console.log(e);
+								}
+							
+							});							
+						} else {
+							alert("빈칸이 존재합니다. 빈칸을 작성주세요.");
+						}
+					});
+					
+				});
+			</script>
+		</th:block>
+	</head>
+		
+	<body>
+		<div layout:fragment="content">
+			<div id="total_pwChange">
+				<div id="pwChange_content">
+					<div id="pwChange_top"></div>
+					<div id="pwChange_bottom">
+						<div id="pwChange_wrap">
+							<form id="pwChangeRealForm" action="/user/PwChange" >
+								<input type="hidden" name="userId" id="userId" th:value="${user.userId}">
+								<p id="text_pw">비밀번호변경</p>
+								<div class="join_label_wrapper">
+						          <label for="userPw">비밀번호</label>
+						        </div>
+						        <div id="pwChange_section01">
+						          <input type="password" id="userPw" name="userPw" placeholder="비밀번호를 입력하시오.">
+						          <div id="join_img_pw_wrap01">
+						            <img src="/images/eye02.png" id="join_img01_eye02">
+						            <img src="/images/eye01.png" id="join_img01_eye01">
+						          </div>
+						        </div>
+						        <p id="pwValidation" style="color: red; font-size: 0.8rem;">
+						          비밀번호는 대소문자, 숫자, 기호(!@#$%^&*) 포함 6글자 이상으로 설정해주세요.
+						        </p>
+						        <div class="join_label_wrapper">
+						          <label for="userPwCheck">비밀번호 확인</label>
+						        </div>
+						        <div id="pwChange_section02">
+						          <input type="password" id="userPwCheck" name="userPwCheck" placeholder="비밀번호를 다시 입력하시오.">
+						          <div id="join_img_pw_wrap02">
+						            <img src="/images/eye02.png" id="join_img02_eye02">
+						            <img src="/images/eye01.png" id="join_img02_eye01">
+						          </div>
+						        </div>
+						        <p id="pwCheckResult" style="font-size: 0.8rem;"></p>
+								<div id="pwCheck_btn">
+									<button type="button" id="btnPwChange">확 인</button>
+								</div>
+							</form>							
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>				
+	</body>
+</html>

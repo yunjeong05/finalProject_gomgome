@@ -1,0 +1,357 @@
+#total_header {
+  width: 100%;
+  position: relative;
+}
+
+#top_header {
+  width: 100%;
+  background:#D8C6A6;
+} 
+   
+#h_section00 {
+  width: 1200px;
+  height: 160px;
+  display: flex;
+  justify-content: start;
+  background:#D8C6A6;
+  margin: 0 auto;
+}
+
+#h_section01 {
+  height: 100%; 
+  width: 250px;
+}
+
+#h_img {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+#logImg {
+  width: 250px; 
+  height: 100px;
+}
+
+#h_section02 {
+  height: 100%; 
+  width:calc(100% - 270px);
+}
+
+#h_btns {
+  height: 50%; 
+  width: 100%; 
+  display: flex; 
+  justify-content: end;
+}
+
+#btnLogin {
+    width: 100px ; 
+    height: 40px; 
+    margin-top: 20px;
+    margin-right: 25px;
+    border: 1px solid #B5A27F; 
+    border-radius: 5%;
+    background-color: #B5A27F; 
+    color:#FFFFFF; 
+    font-size: 1rem; 
+    font-weight: bold;
+}
+  
+#btnJoin {
+    width: 100px; 
+    height: 40px; 
+    margin-top: 20px;
+    border: 1px solid #B5A27F; 
+    border-radius: 5%;
+    background-color: #B5A27F; 
+    color:#FFFFFF; 
+    font-size: 1rem; 
+    font-weight: bold;
+}
+ 
+#h_section04 ul li {
+  list-style-type: none; 
+  display: inline-block;
+  box-sizing: content-box;
+  margin: 0 12px;
+  width: 100px;
+}
+
+.m_title{
+  font-size: 1.1rem;
+  font-weight: bold;   
+  display: inline-block;
+  width: 100px;
+  text-decoration: none;
+  color:#333333;
+}
+
+#h_section03 {
+  height: 100%; 
+  width: 100%; 
+  display: flex; 
+  align-items: center;
+  justify-content: space-between;
+}
+
+#h_section03 > nav {
+   height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#h_search {
+  width: 270px;
+  position: relative;
+}
+
+#h_search input {
+  width: 100%;
+  height: 32px;
+  border: 1px solid  #B5A27F;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+#h_search_img{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+#searchImg{
+  height: 22px;
+}
+
+#bottom_header {
+  width: 100%;
+  background-color: #B5A27F;
+  display:none;
+  position: absolute;
+  top: 160px;
+  left: 0;
+  z-index: 999;
+}
+
+/* hover 효과 적용*/
+/*.m_title:hover ~ #bottom_header{
+   display: block;
+}*/
+
+#h_section05 {
+  width: 1200px;
+  height: 160px;
+  margin: 0 auto;
+}
+
+#h_section06 ul li {
+  list-style-type: none;
+  margin-top: 25px;
+}
+
+#h_section06{
+  color:#FFFFFF;
+  font-size: 1rem;
+  font-weight:bold;
+  margin-left: 250px;
+}
+
+.h_block {
+  display: inline-block;
+  margin: 0 12px; 
+  box-sizing: content-box;
+  width: 100px;   
+  margin-top: 5px; 
+}
+
+.s_title{
+  text-decoration: none;
+  color:#FFFFFF;
+  font-weight: bold;  
+}
+
+/*로그인시 헤더 */
+.h_u_title {
+  background: none;
+  border: none;
+}
+
+#h_user {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 50%;
+}
+
+#h_user_btns ul li{
+  list-style-type: none; 
+  display: inline-block; 
+  box-sizing: content-box;
+}
+
+.h_u_title{
+  font-size: 1.01rem;
+  font-weight: bold;
+  text-decoration: none;
+  color:#333333;
+}
+
+.h_mark{
+  color: #7F7F7F;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+#h_imgs{
+  display:flex;  
+  margin-left: 20px;
+}
+
+#userImg, #alarmImg {
+  height: 40px;
+}
+
+#userImg{
+  margin-right: 13px;
+}
+
+/* 관리자 로그인 시 헤더 */
+#h_admin{
+  color: #FFF;
+}
+
+#h_section07 ul li {
+  list-style-type: none; 
+  display: inline-block;
+  box-sizing: content-box;
+  /*margin: 0 12px;*/
+  margin: 0 auto;
+  width: 110px;
+}
+
+.a_title{
+  font-size: 1.1rem;
+  font-weight: bold;   
+  display: inline-block;
+  width: 110px;
+  text-decoration: none;
+  color:#7F7F7F;	
+}
+
+
+#h_admin_title{
+  display: none;
+}
+
+#a_users{
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+#a_qna{
+  margin-left: 20px;
+}
+
+#a_report{
+	margin-left: 35px;
+}
+
+#a_fna{
+	margin-left: 40px;
+}
+
+/* 푸터 */
+.footer {
+   height: 200px;
+   background-color: #D8C6A6;
+   text-align: center;
+   line-height: 200px;
+}
+
+/* 로그아웃 시 모달 */
+
+.m-4555 {
+  margin:0px;
+}
+.gomgomeLogout {
+  box-sizing: border-box;
+  margin-top: 55px;
+  margin-left:500px;	
+}
+
+.total_logout {
+  display: flex;
+  justify-content: center;
+  margin: o auto;
+  position: relative;
+  width: 150px;
+  height: 120px;
+  background-color: #B5A27F;
+  border-radius: 5px;
+}
+.logout_text{
+  background-color: #B5A27F !important;
+  border: none !important;
+}
+.total_logout::after {
+  content: '';
+  position: absolute;
+  left: 55px;
+  /* top: 50%; */
+  margin-top: -40px;
+  border-left: 20px solid transparent;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid #B5A27F;;
+  border-right: 20px solid transparent;
+}
+.logout_text {
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  margin: 0;
+  padding: 5%;
+}
+
+.logout_top{
+  height: 65px;
+}
+.logout_count{
+  font-size: 2.6rem;
+  font-weight: bold;
+  color : #fff;
+  text-align: center;
+}
+.logout_bottom{
+  border-top: none;
+  padding: 0;
+}
+.logout_box ul li {
+  list-style-type: none;
+}
+
+.logout_box ul {
+  margin-top: 15px;
+}
+
+.logout_box{
+  justify-content: center;
+  margin: 0 auto;
+  width: 130px;
+  height: 50px;
+  border-top: 2px solid #333;
+  text-align: center;
+}
+
+#h_user_logout{
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-decoration: none;
+  text-align: center;
+}

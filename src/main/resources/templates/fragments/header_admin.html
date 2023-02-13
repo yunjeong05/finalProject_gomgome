@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
+	<head>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+					
+			</script>
+		</th:block>
+	</head>
+	<body>
+		<header th:fragment="header_admin">
+		   <div id="total_header">
+		    <div id="top_header">
+		      <div id="h_section00">
+		        <div id="h_section01">
+		          <div id="h_img">
+		            <img src="/images/mainLogo.png" id="logoImg">
+		          </div>
+		        </div>
+                <div id="h_section02">
+		          <div id="h_btns" th:if="${#authentication == null || #authentication.principal == 'anonymousUser'}">
+		            <button type="button" id="btnLogin">로그인</button>
+		            <button type="button" id="btnJoin">회원가입</button>
+		          </div>
+		          <div id="h_user" sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+		            <div id="h_user_btns">
+		              <ul>
+		                <li id="h_admin_title" sec:authorize="hasAnyRole('ROLE_ADMIN')"><a th:href="@{/admin/adminView}" class="h_u_title" id="h_admin">관리자페이지</a><span class="h_mark">|</span></li>
+		                <li><a th:href="@{#}" class="h_u_title" id="h_note">내노트</a><span class="h_mark">|</span></li>
+		                <li><a th:href="@{/mypage/total_plan}" class="h_u_title" id="h_myplan">내플랜</a><span class="h_mark">|</span></li>
+		                <li><a th:href="@{/user/infoView}" class="h_u_title" id="h_user" th:text="${#authentication.principal.user.userNickname} + '님'"></a></li>
+		              </ul>
+		            </div>
+		            <div id="h_imgs">
+		              <div id="h_userImg">
+		                <img src="/images/user.png" id="userImg">
+		              </div>
+		              <div id="h_alarmImg">
+		                <img src="/images/alarm.png" id="alarmImg">
+		              </div>
+		            </div>            
+		          </div>
+		          <div id="h_section03" style="height: 50%;">
+		            <nav>
+		              <div id="h_section07">
+		              	<ul>
+		                  <li><a th:href="@{/admin/getUserList}" class="a_title" id="a_users">회원관리</a></li>
+		                  <li><a th:href="@{/admin/getNoticeList}" class="a_title" id="a_notices">공지사항관리</a></li>
+		                  <li><a th:href="@{/admin/getQuestionList}" class="a_title" id="a_qna">문의사항관리</a></li>
+		                  <li><a th:href="@{/admin/getReportList}" class="a_title" id="a_report">신고리스트</a></li>
+		                  <li><a th:href="@{#}" class="a_title" id="a_fna">FAQ관리</a></li>
+		                </ul>
+		              </div>
+		            </nav>
+		          </div>
+		        </div>      
+		      </div>
+		    </div>
+		  </div>
+		  <!--모달위치가 여기-->
+		  <div class="m-4555">
+		    <div id="myModal" class="modal fade gomgomeLogout" tabindex="-1">
+		        <div class="modal-dialog total_logout">
+		            <div class="modal-content logout_text" >
+		                <div class="modal-body logout_top">
+		                  <div id="logout_timer">
+		                    <p class="logout_count">##:##</p>
+		                  </div>
+		                </div>
+		                <div class="modal-footer logout_bottom">
+		                  <div class="logout_box">
+		                    <ul>
+		                      <li><a th:href="@{/user/logout}" id="h_user_logout">로그아웃</a></li>
+		                    </ul>
+		                  </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		</header>
+	</body>
+</html>

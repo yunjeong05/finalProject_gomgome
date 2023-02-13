@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko"
+   xmlns:th="http://www.thymeleaf.org"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{layouts/layout}">
+   
+
+   <!-- head 영역 시작 -->
+   <!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+   <head>
+      <th:block layout:fragment="css">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+         <link rel="stylesheet" th:href="@{/css/communityboard.css}">
+      </th:block>
+      <th:block layout:fragment="script">
+         <script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+         <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		 <script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+         <script th:src="@{/js/common.js}"></script>
+         <script th:inline="javascript">
+         	$(document).ready(function(){
+		      let click = document.querySelector(".declear");
+		      let close = document.querySelector(".modal-close");
+		      click.addEventListener("click", function () {
+		        document.getElementById("modalPop").style.display = "block";
+		      });
+		      close.addEventListener("click", function () {
+		        document.getElementById("modalPop").style.display = "none";
+		      });
+		
+		      function closePop() {
+		        document.getElementById("modalPop").style.display = "none";
+		      }
+		
+		      function regComment(num) {
+		        document.getElementById("hide-comment-" + num).style.display = "block";
+		      }
+		
+		     
+		
+		     const swiper = new Swiper('.swiper', {
+		        slidesPerView: 4,
+		        spaceBetween: 50,
+		        slidesPerGroup: 4,
+		
+		        navigation: {
+		          nextEl: '.swiper-button-next',
+		          prevEl: '.swiper-button-prev',
+		        }
+		      });
+		      $("#changeTest").change(function(){
+		        console.log($(this).val());
+		        $("#changeInput").val($(this).val());
+		      });
+		     });
+	     
+	    </script>
+      </th:block>
+      
+    
+   </head>
+   <!-- head 영역 끝 -->
+   
+
+   
+   
+    <body>
+    <div layout:fragment="content">
+    <section id="section">
+      <p id="title">공부 도움받기</p>
+      <div class="title-wrapper">
+      <input type="hidden" id="communityNo" th:value="${howto.communityNo}"/>
+        <h3><input type="text" name="contenttitle" th:value="${howto.communityTitle}" readonly></h3>
+        <div class="list-wrapper">
+          <ul class="title-info">
+            <li id="profile">
+              <a href="javascript:;"></a>
+            </li>
+            <li><input type="text" th:value="${howto.userId}" id="value" readonly><input type="text" th:value="${#strings.replace(howto.communityRegdate, 'T', ' ')}" id="value" readonly>  </li>
+            <li>조회수 <input type="text" th:value="${howto.communityCnt}" id="value2" readonly></li>
+            <li>좋아요 <input type="text" th:value="${howto.communityLike}" id="value2" readonly></li>
+          </ul>
+          <div class="help-info">
+          <input type="hidden" th:value="${howto.communityType}" name="communityType" id="communityType">
+            <button type="button"> <a th:href="@{/community/communityModify}"> 수정</a></button>
+            <button type="button" id="deleteBtn">삭제</button>
+            <button type="button" class="declear" style="z-index: 999;">신고</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-wrapper">
+        <span>
+        <textarea th:text="${howto.communityContent}"  cols="162" readonly></textarea>
+        </span>
+        
+        <div class="swiper" style="padding-left: 50px; padding-right: 50px;">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <a href="javascript:;">
+                <img src="/images/attach.png" alt="첨부이미지"/>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="javascript:;">
+                <img src="/images/attach.png" alt="첨부이미지"/>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="javascript:;">
+                <img src="/images/attach.png" alt="첨부이미지"/>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="javascript:;">
+                <img src="/images/attach.png" alt="첨부이미지"/>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="javascript:;">
+                <img src="/images/attach.png" alt="첨부이미지"/>
+              </a>
+            </div>
+          </div>
+
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+        
+
+    
+
+        <div class="info-btn">
+          <a class="heart-btn" href="javascript:;">
+            <span class="ico-heart">찜 취소</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="comment-wrapper">
+        <ul class="moving-btn">
+          <li>
+            <a class="prev-move bt" href="javascript:;">
+              <span>◀ &nbsp; 이전</span>
+            </a>
+          </li>
+          <li>
+            <a class="next-move bt" href="javascript:;">
+              <span>다음 &nbsp; ▶</span>
+            </a>
+          </li>
+          <li>
+            <a class="back-move bt" href="javascript:;">
+              <span>목록으로 돌아가기</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="reply-wrapper">
+        <div class="social-wrapper">
+          <ul class="social-btns">
+            <li>
+              <a class="like-btn bt" href="javascript:;">
+                <span class="ico-like">좋아요 </span>
+              </a>
+            </li>
+            <li>
+              <a class="comment-btn bt" href="javascript:;">
+                <span class="ico-comment">댓글 00 &nbsp; ▲</span> 
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="users-wrapper">
+          <div class="user-content">
+            <div class="user-profile">
+              <a class="user" href="javascript:;"> </a>
+              <span><input type="text" th:text="${howto.userId}" id="value">님</span>
+            </div>
+            <textarea class="replay-textarea"></textarea>
+            <div class="reply-btn">
+              <button type="button">댓글 달기</button>
+            </div>
+          </div>
+
+          <div class="user-content">
+            <div class="user-profile">
+              <a class="user" href="javascript:;"> </a>
+              <span><input type="text" th:text="${howto.userId}" id="value">님</span>
+              <span class="user-self">작성자</span>
+            </div>
+
+            <div class="content-info">
+              <p>
+               
+              </p>
+              <div class="content-tool">
+                <ul class="date">
+                  <li><input type="text" th:text="${howto.communityRegdate}" id="value"></li>
+                  <li>
+                    <button type="button" onclick="regComment(1)">
+                      답글쓰기
+                    </button>
+                  </li>
+                </ul>
+                <ul class="kit">
+                  <li><button type="button">수정</button></li>
+                  <li id="kit-del"><button type="button">삭제</button></li>
+                  <li><button type="button">신고</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="user-content sub" id="hide-comment-1">
+            <div class="user-profile">
+              <a class="user" href="javascript:;"> </a>
+              <span><input type="text" th:text="${howto.userId}" id="value">님</span>
+            </div>
+            <textarea class="replay-textarea"></textarea>
+            <div class="reply-btn">
+              <button type="button">답글 쓰기</button>
+            </div>
+          </div>
+
+          <div style="clear: both"></div>
+
+          <div class="user-content">
+            <div class="user-profile">
+              <a class="user" href="javascript:;"> </a>
+              <span><input type="text" th:text="${howto.userId}" id="value">님</span>
+            </div>
+            <div class="content-info">
+              <p>
+                
+              </p>
+              <div class="content-tool">
+                <ul class="date">
+                  <li><input type="text" th:text="${howto.communityRegdate}" id="value"></li>
+                  <li>
+                    <button type="button" onclick="regComment('2')">
+                      답글쓰기
+                    </button>
+                  </li>
+                </ul>
+                <ul class="kit">
+                  <li id="kit-dels"><button type="button">삭제</button></li>
+                  <li><button type="button">신고</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="user-content sub" id="hide-comment-2">
+            <div class="user-profile">
+              <a class="user" href="javascript:;"> </a>
+              <span><input type="text" th:text="${howto.userId}" id="value">님</span>
+            </div>
+            <textarea class="replay-textarea"></textarea>
+            <div class="reply-btn">
+              <button type="button">답글 쓰기</button>
+            </div>
+          </div>
+
+          <div style="clear: both"></div>
+
+          <div class="user-content">
+            <div class="user-profile">
+              <a class="user" href="javascript:;"> </a>
+              <span><input type="text" th:text="${howto.userId}" id="value">님</span>
+              <span class="user-self">작성자</span>
+            </div>
+            <div class="content-info">
+              <p>
+              
+              </p>
+            </div>
+            <div class="reply-btn">
+              <button type="button">수정 완료</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+`
+    
+    <form id="insertForm" class="form" action="/community/insertReportReg" method="post">
+    <input type="hidden" name="communityType" th:value="${howto.communityType}">
+    <div class="modal" id="modalPop">
+        <div class="overlay"></div>
+        <div class="modal-card">
+          <div class="modal-head">
+            <button class="modal-mini"></button>
+            <button class="modal-max"></button>
+            <button class="modal-close"></button>
+          </div>
+          <div class="modal-wrapper">
+            <ul class="modal-con">
+              <li>
+                <dl>
+                  <dt>
+                    <select class="type-select" id="changeTest">
+                      <option value=""  selected>신고이유를 선택해주세요.</option>
+                      <option value="광고">광고</option>
+                      <option value="부적절한">부적절한</option>
+                      <option value="욕설">욕설</option>
+                    </select>
+                  </dt>
+                  <dd><input type="text" name="reportReason" id="changeInput"/></dd>
+                </dl>
+              </li>
+  
+              <li>
+                <dl>
+                  <dt>신고자 아이디</dt>
+                  <dd><input type="text" th:value="${#authentication.principal.username}" name="reportUserId"  readonly / ></dd>
+                </dl>
+              </li>
+  
+              <li>
+                <dl>
+                  <dt>게시판</dt>
+                  <dd><input type="text" th:value="${howto.communityTitle}"  readonly / ></dd>
+                </dl>
+              </li>
+  
+              <li>
+                <dl>
+                  <dt>게시글 번호</dt>
+                  <dd><input type="text" th:value="${howto.communityNo}" name="communityNo" readonly / ></dd>
+                </dl>
+              </li>
+  
+             
+              <!--
+              <li>
+                <dl>
+                  <dt>댓글 번호</dt>
+                  <dd><input type="text" th:value="${pr.communityNo}" readonly / ></dd>
+                </dl>
+              </li>
+              -->
+  
+              <li>
+                <dl>
+                  <dt>작성자</dt>
+                  <dd><input type="text" name="writtenUserId" th:value="${howto.userId}" readonly / ></dd>
+                </dl>
+              </li>
+            </ul>
+            <div class="modal-btns">
+              <button type="button" onclick="closePop()">취소</button>
+              <button type="submit" class="register">등록</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+   </div>
+  </body>
+  
+  
+</html>

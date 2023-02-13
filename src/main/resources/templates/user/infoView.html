@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+	<head>
+		<th:block layout:fragment="css">	
+			<link rel="stylesheet" type="text/css" th:href="@{/css/infoView.css}">
+		</th:block>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				$(function(){
+					// resultMsg에 따라 비교해서 화면단 전환하던가 비밀번호창 alert, 비밀번호창 삭제하기 
+					$("#btnPwCheck").on("click", function(){
+						if($("#infoPw").val() != ""){
+							$.ajax({
+								url : "/user/pwCheck",
+								type: "post",
+								data: {
+									userPw: $("#infoPw").val()
+								},
+								success: function(obj){
+									console.log(obj);
+									
+									if(obj.item.resultMsg == 'pwOk'){
+										window.location.href = "/user/updateUser";										
+									} else {
+										$(".updatePwModal_not").modal("show");
+        								$(".modal-backdrop").removeClass("show");
+										$("#infoPw").val("");
+										$("#infoPw").focus();
+									}
+								} 
+										
+							});							
+						} else {
+							//alert("비밀번호를 작성해주세요!")
+							$(".updatePwBlankModal").modal("show");
+							$(".modal-backdrop").removeClass("show");
+							$("#infoPw").focus();
+						}						
+					});
+					
+					$(".btnUpdatePwcheck").on("click", function(){
+						$(".ModalBox").modal('hide');
+					});
+					
+				});				
+			</script>
+		</th:block>
+	</head>
+		
+	<body>
+		<div layout:fragment="content">
+			<div id="total_pwCheck">
+				<div id="pwCheck_content">
+					<div id="pwCheck_top"></div>
+					<div id="pwCheck_bottom">
+						<div id="pwCheck_wrap">
+							<p>내정보 수정</p>
+					        <div id="pw_wrap">
+					        	<div id="img_pwCheck_wrap01">
+					        		<img src="/images/userpw.png" id="img_pwCheck">
+					            </div>
+					            <input type="password" name="infoPw" id="infoPw" placeholder="비밀번호">
+					        </div>
+							<div id="pwCheck_btn">
+								<button type="button" id="btnPwCheck">확 인</button>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+			<!--비밀번호 불일치 모달-->
+			 <div id="myModal" class="modal fade ModalBox updatePwModal_not" tabindex="-1">
+			    <div class="modal-dialog">
+			        <div class="modal-content updatePwModal_box">
+			            <div class="modal-header updatePwModal_top">
+			                <h5 class="modal-title"></h5>
+			                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			            </div>
+			            <div class="modal-body updatePwModal_body">
+			                <p>비밀번호가 일치하지 않습니다.</p>
+			            </div>
+			            <div class="modal-footer updatePwModal_footer">
+			                <button type="button" class="btnUpdatePwcheck">확 인</button>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<!--비밀번호 빈칸 일때 모달-->
+			 <div id="myModal" class="modal fade ModalBox updatePwBlankModal" tabindex="-1">
+			    <div class="modal-dialog">
+			        <div class="modal-content updatePwModal_box">
+			            <div class="modal-header updatePwModal_top">
+			                <h5 class="modal-title"></h5>
+			                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			            </div>
+			            <div class="modal-body updatePwModal_body">
+			                <p>비밀번호를 작성해주세요!</p>
+			            </div>
+			            <div class="modal-footer updatePwModal_footer">
+			                <button type="button" class="btnUpdatePwcheck">확 인</button>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</div>				
+	</body>
+</html>

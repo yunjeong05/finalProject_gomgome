@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko"
+   xmlns:th="http://www.thymeleaf.org"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{layouts/layout}">
+   
+
+   <!-- head 영역 시작 -->
+   <!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+   <head>
+      <th:block layout:fragment="css">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+         <link rel="stylesheet" th:href="@{/css/cscenter_inquiry.css}">
+      </th:block>
+      <th:block layout:fragment="script">
+         <script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+         <script th:src="@{/js/common.js}"></script>
+      </th:block>
+   </head>
+   <!-- head 영역 끝 -->
+   
+
+   
+   <body> 
+   <div layout:fragment="content" id="wrap">  
+    <div id="inquiry">
+        <div class="wrap">
+            <div class="title">문의사항</div>
+            <div class="form">
+                <ul>
+                    <li>
+                        <dl class="w33p">
+                            <dt>번호</dt>
+                            <dd><input type="text" value="${questionNo}" style="border: none;" readonly></dd>
+                        </dl>
+                        <dl class="w33p">
+                            <dt>작성자</dt>
+                            <dd><input type="text" value="${userId}" style="border: none;" readonly></dd>
+                        </dl>
+                        <dl class="w33p">
+                            <dt>등록일</dt>
+                            <dd><input type="text" value="${questionRegdate}" style="border: none;" readonly></dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl class="w33p">
+                            <dt>문의유형</dt>
+                            <dd><input type="text" value="${questionType}" style="border: none;"> </dd>
+                        </dl>
+                        <dl class="w66p">
+                            <dt>제목</dt>
+                            <dd><input type="text" value="${questionTitle}" style="border: none;"></dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl class="w100p">
+                            <dt>내용</dt>
+                            <dd><span class="textarea" value="${questionContent}"></span></dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl class="w100p">
+                            <dt>답변</dt>
+                            <dd><span class="answer"><input type="text" value="${questionReply}" style="border: none;"></span></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="button">
+                <div class="fl">
+                    <a href="#" class="btn btn_02">답변하기</a>
+                </div>
+                <div class="fr">
+                    <a href="#" class="btn btn_02 modalOpen" data-modal="pop_delete">삭제</a>
+                    <a href="#" class="btn btn_01 modalOpen" data-modal="pop_report">신고</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pop_delete" class="modal-container">
+        <div class="modal-wrapper">
+            <div class="head">
+                <a href="javascript:;" class="modalClose"><img src="/images/icon_close.png"></a>
+            </div>
+            <div class="cont">
+                <div class="text">삭제 하시겠습니까? <br>삭제한 글은 복구할 수 없습니다.</div>
+                <div class="button">
+                    <a href="javascript:;" class="btn btn_01 modalClose">취소</a>
+                    <a href="javascript:;" class="btn btn_01 modalClose">확인</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pop_report" class="modal-container">
+        <div class="modal-wrapper">
+            <div class="head">
+                <a href="javascript:;" class="modalClose"><img src="/images/icon_close.png"></a>
+            </div>
+            <div class="cont">
+                <div class="form">
+                    <dl>
+                        <dt>
+                            <select id="changeSelect">
+                                <option value="" selected disabled>신고유형</option>
+                                <option value="##">##</option>
+                                <option value="광고">광고</option>
+                                <option value="부적절한">부적절한</option>
+                                <option value="욕설">욕설</option>
+                            </select>
+                            <script>
+                            $(document).ready(function(){
+                                $("#changeSelect").change(function(){
+                                    $("#changeInput").val($(this).val());
+                                });
+                            })
+                            </script>
+                        </dt>
+                        <dd><input type="text" id="changeInput" value="" readonly placeholder="신고유형을 선택해주세요."></dd>
+                    </dl>
+                    <dl>
+                        <dt>신고자 아이디</dt>
+                        <dd><input type="text" value="${userId}" readonly></dd>
+                    </dl>
+                    <dl>
+                        <dt>게시판</dt>
+                        <dd><input type="text" value="${questionTitle}" readonly></dd>
+                    </dl>
+                    <dl>
+                        <dt>게시글 번호</dt>
+                        <dd><input type="text" value="${questionNo}" readonly></dd>
+                    </dl>
+                    <dl>
+                        <dt>댓글번호</dt> <!-- 댓글 번호..? -->
+                        <dd><input type="text" value="${questionReply}" readonly></dd>
+                    </dl>
+                    <dl>
+                        <dt>등록자</dt>
+                        <dd><input type="text" value="${userId}" readonly></dd>
+                    </dl>
+                </div>
+                <div class="button">
+                    <a href="javascript:;" class="btn btn_02 modalClose">취소</a>
+                    <a href="javascript:;" class="btn btn_01 modalClose">신고하기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>  
+</body>
+
+
+
+</html>

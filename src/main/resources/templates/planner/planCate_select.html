@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- head 영역 시작 -->
+<!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+<head>
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+		<link rel="stylesheet" th:href="@{/css/planCate.css}">
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+		<script th:src="@{/js/planCate.js}"></script>
+	</th:block>
+</head>
+<!-- head 영역 끝 -->
+
+<body>
+<div class="planCate_select" th:fragment="planCate_select">
+  <div class="planCateSub">
+    <div id="sub_container">
+    </div>
+
+    <ul class="pagination">
+      <a href="#">&lt;</a>
+      <a href="#" class="current">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">&gt;</a>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+*{
+	margin: 0;
+}
+#getPlanCalList {
+	display: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+th {
+    height: 50px;
+    width: 70px;
+    border: 1px solid #B5A27F;
+    background-color:  #B5A27F;
+    color: #ffffff;
+}
+td {
+    text-align: center;
+    height: 80px;
+    width: 70px;
+    /* background-color: #D8C6A6;   */
+    vertical-align: top;
+    text-align: right;
+    border: 1px solid #B5A27F;
+}
+input[name=nextMon] {
+    height: 40px;
+    width: 40px;
+    border: none;
+    background: url("/images/next.png");
+    background-size: cover;
+}
+input[name=preMon] {
+    height: 40px;
+    width: 40px;
+    border: none;
+    background: url("/images/next.png");
+    background-size: cover;
+    rotate: 180deg;
+}
+
+.year_mon{
+    font-size: 25px;
+}
+.colToday{
+    background-color: #D8C6A6;
+    color: #ffffff;
+}

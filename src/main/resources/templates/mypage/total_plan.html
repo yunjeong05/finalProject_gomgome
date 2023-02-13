@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout_myplan}">
+	  
+	<!-- head 영역 시작 -->
+	<!-- 개별적으로 사용할 css, js 링크 걸기 위해 남겨둠 -->
+	<head>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				const rankStudyhourTotal = /*[[${rankStudyhourTotal}]]*/;
+				const userStudyhourTotal = /*[[${userStudyhourTotal}]]*/;
+				const planUsersList = /*[[${planUsersList}]]*/;
+				const scheduleList = /*[[${scheduleList}]]*/;
+				const goalList = /*[[${goalList}]]*/;
+				const closedList = /*[[${closedList}]]*/; 	
+			</script>
+			<script th:src="@{/js/total_plan.js}"></script>
+		</th:block>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/total_plan.css}">
+		</th:block>
+	</head>
+	<!-- head 영역 끝 -->
+		
+	
+	<body>
+		<div layout:fragment="content" id="content_mypage">
+			<div id="totalplanLeft">
+				<div id="totalplanLeftCategory">
+					<h2>진행중인 플랜</h2>
+					<span><input class="btnCategory" type="button" value="+ 추가"></span>
+				</div>
+				<form id="addCategory" action="/mypage/insertMyplan" method="post">
+					<div class="addCategotyTr">
+						<select class="addCategoryLeft select">
+							<option value="1" selected>시험</option>
+							<option value="2">자기개발</option>
+							<option value="3">운동</option>
+							<option value="4">취미</option>
+						</select>
+						<input class="addCategoryRight" id="addCategoryMain" name="planMaincategoryNo" type="text" value="1" readonly>
+					</div>
+					<div class="addCategotyTr">
+						<span class="addCategoryLeft">
+							플랜 이름
+						</span>
+						<input class="addCategoryRight" name="planName" type="text">
+					</div>
+					<div class="addCategotyTr">
+						<span class="addCategoryLeft">
+							시작일자
+						</span>
+						<input class="addCategoryRight" name="planStart" type="date">
+					</div>
+					<div class="addCategotyTr">
+						<span class="addCategoryLeft">
+							마감일자
+						</span>
+						<input class="addCategoryRight" name="planEnd" type="date">
+					</div>
+					<div class="addCategotyTr">
+						<span class="addCategoryLeft">
+							D-day
+						</span>
+						<input class="addCategoryRight" name="planDday" type="date">
+					</div>
+					<div class="addCategotyTr">
+						<span class="addCategoryLeft">
+							색상 지정
+						</span>
+						<input class="addCategoryRight" name="planColor" type="color" value="#D8C6A6">
+					</div>
+					<div class="addCategoryBtn">
+						<input class="btnAddCategoryCancel" type="button" value="취소하기">
+						<span style="width: 20px; display: inline-block;"></span>
+						<input class="btnAddCategorySubmit" type="submit" value="저장하기">
+					</div>
+				</form>
+				<div id="totalplanLeftCategoryContent">
+					<div th:each="plan : ${planUsersList}">
+						<input type="button" th:value="${plan.planName}"  th:onclick="|location.href='@{/mypage/getMyschedule(planNo=${plan.planNo})}'|">
+					</div>
+				</div>
+				
+				<div id="totalplanLeftTotalstudyhour">
+					<h2>누적 공부시간</h2>
+					<span></span>
+				</div>
+				
+				<div id="totalplanLeftRank">
+					<h2>공부시간 전체 순위</h2>
+					<span></span>
+				</div>
+			</div>
+			
+			<div id="totalplanRight">
+				<div id="totalplanRightDday">
+					<h2>D-day</h2>
+				</div>
+				<div id="totalplanRightDdayContent">
+					
+				</div>
+				
+				<div id="totalplanRightGoal">
+					<h2>목표 성공리스트</h2>
+				</div>
+				<div id="totalplanRightGoalContent">
+					
+				</div>
+				
+				<div id="totalplanRightClosed">
+					<h2>D-day가 지난 플랜</h2>
+				</div>
+				<form id="updateGoal" action="/mypage/updateGoal" method="post">
+					<input type="hidden" id="goalPlanNo" name="planNo">
+					<div class="addGoalTr">
+						<span class="addGoalLeft">플랜 이름</span>
+						<input class="addGoalRight" type="text" name="planName" readonly>
+					</div>
+					<div class="addGoalTr">
+						<span class="addGoalLeft">달성 여부</span>
+						<div class="addGoalRight radio">
+							<label class="planStatusL"><input type="radio" name="planStatus" value="1">&emsp;달성</label>
+							<label class="planStatusR"><input type="radio" name="planStatus" value="2">&emsp;미달성</label>
+						</div>
+					</div>
+					<div class="addGoalTr">
+						<span class="addGoalLeft">내용</span>
+						<input class="addGoalRight" type="text" name="planGoal">
+					</div>
+					<div class="addGoalBtn">
+						<input class="btnGoalCancel" type="button" value="취소하기">
+						<span style="width: 20px; display: inline-block;"></span>
+						<input class="btnGoalSubmit" type="submit" value="저장하기">
+					</div>
+				</form>
+				<div id="totalplanRightClosedContent">
+					
+				</div>
+			</div>
+			
+			 
+		</div>
+	</body>
+	
+</html>

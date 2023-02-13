@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+	<head>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" type="text/css" th:href="@{/css/findIdPw.css}">
+		</th:block>
+	
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				$(function(){
+					const url = location.href;
+					
+					const arr = url.split('/');
+					const pathParam = arr[arr.length - 1];
+					console.log(pathParam);
+					/* 화면에 넘길 때 url 값 파라미터 값을 찾기 
+					const searchParams = new URLSearchParams(location.search);
+					var idOrPw; 
+					for (const param of searchParams) {
+			            console.log(param[1]);
+			            idOrPw = param[1];
+			        }*/
+			        /* 0일 때 아이디 찾기 , 1일때 비밀번호찾기 화면 이동 */
+			        if(pathParam == 0 ) {
+						$("#pwView").hide(0,function(){
+					    $("#btnPwView").css("background", "#E0E0E0").css("border", "#E0E0E0");
+					    $("#btnIdView").css("background","#B5A27F").css("border", "#B5A27F");
+				        $("#idView").show(0);
+				        });	
+					} else {
+						$("#pwView").show(0,function(){
+					    $("#btnIdView").css("background", "#E0E0E0").css("border", "#E0E0E0");
+					    $("#btnPwView").css("background","#B5A27F").css("border", "#B5A27F");
+				        $("#idView").hide(0);
+						});
+					} 
+					
+					/*아이디찾기/비밀번호찾기 화면전환*/ 
+					$("#btnIdView").on("click",function(){	
+						  $("#pwView").hide(0,function(){
+					      $("#btnPwView").css("background", "#E0E0E0").css("border", "#E0E0E0");
+					      $("#btnIdView").css("background","#B5A27F").css("border", "#B5A27F");
+				          $("#idView").show(0);
+				        });		
+					});
+					
+					$("#btnPwView").on("click",function(){
+						  $("#pwView").show(0,function(){
+					      $("#btnIdView").css("background", "#E0E0E0").css("border", "#E0E0E0");
+					      $("#btnPwView").css("background","#B5A27F").css("border", "#B5A27F");
+				          $("#idView").hide(0);
+				        });				
+					});
+					
+					/*아이디찾기 이름, 이메일 작성후 확인 버튼 클릭 */			
+					$("#btnIdCheck").on("click", function(){
+						if($("#findId_name").val() != "" && $("#findId_email").val() != ""){
+							$.ajax({
+								url:'/user/findId',
+								type: 'post',
+								data: {
+									userName: $("#findId_name").val(),
+									userEmail: $("#findId_email").val()
+								},
+								success: function(obj){
+									console.log(obj);
+									
+									if(obj.item.resultMsg == 'idNone'){
+										$(".findIdModal_not").modal('show');
+										$(".modal-backdrop").removeClass("show");
+										$("#findId_name").val("");
+										$("#findId_email").val("");
+										$("#findId_name").focus();
+									} else {
+										$("#idText").text(`회원 아이디는 ${obj.item.resultMsg} 입니다.`);
+										$(".findIdModal").modal('show');
+										$(".modal-backdrop").removeClass('show');								
+									}
+								},
+								error: function(e){
+									console.log(e);
+								}								
+							})
+						} else {
+							alert("빈칸이 존재합니다. 빈칸을 작성해주세요.");
+							$("#findId_name").focus();
+						}
+							
+					});
+					
+					
+					/* 아이디 찾기 관련 모달창 확인 누르면 사라지는 효과 */
+					$(".btnFindIdcheck").on("click", function(){
+						$(".ModalBox").modal('hide');
+						$("#findId_name").val("");
+						$("#findId_email").val("");		
+					});
+					
+					/*비밀번호찾기 이름,아이디,이메일 작성후 확인 버튼 클릭 -> 인증번호 전송*/
+					/* 인증번호 유효시간 3분 설정 */	
+					var timer = null; 
+					var isRunning = false; 
+					
+					$("#sendTempPw").on("click", function(){
+						var display = $(".time");
+						var leftSec = 180; 
+						
+						if($("#findPw_name").val() != "" && $("#findPw_id").val() != ""&& $("#findPw_email").val() != ""){
+							$.ajax({
+								url:'/user/searchPw',
+								type: 'post',
+								data: {
+									userName: $("#findPw_name").val(),
+									userId: $("#findPw_id").val(),
+									userEmail: $("#findPw_email").val()
+								},
+								success: function(obj){
+									console.log(obj);
+									if(obj.item.pwMsg == "idFail"){
+										alert("존재하지 않는 아이디 입니다.");
+									
+									} else if(obj.item.pwMsg == "nameFail"){
+										alert("이름이 틀렸습니다.");
+									} else if(obj.item.pwMsg == "emailFail"){
+										alert("잘못된 이메일 주소입니다.");
+									} else {
+										$("#tempPw").val("");
+										display.html("");
+										alert("인증번호가 메일로 발송되었습니다.");						
+										//버튼 클릭 시 시간연장
+										if(isRunning && timerStart) {
+											clearInterval(timer);
+											//display.html("");
+											startTimer(leftSec, display);
+										} else {
+											startTimer(leftSec, display);
+										}
+										
+									} 
+								},
+								error: function(e){
+									console.log(e);
+								}								
+							})
+						} else {
+							alert("빈칸이 존재합니다. 빈칸을 작성해주세요.");
+							$("#findPw_name").focus();
+						}					
+					});
+					
+					/* startTimer 함수 */
+					function startTimer(count, display) {
+						$(".time").css("color", "black");
+						$("#sendTempPw").attr("disabled", true);
+						var minutes, seconds; 
+						timer = setInterval(function(){
+							minutes = parseInt(count / 60, 10);
+							seconds = parseInt(count % 60, 10);
+							
+							minutes = minutes < 10 ? "0" + minutes : minutes; 
+							seconds = seconds < 10 ? "0" + seconds : seconds;
+							
+							display.html(minutes + ":" + seconds);
+							
+							// 타이머 끝
+							if(--count < 0){ 
+								clearInterval(timer);
+								display.html("시간초과").css("color", "red");
+								$("#sendTempPw").attr("disabled", false);
+								$.ajax({
+									url: '/user/updateTemPw',
+									type: 'post',
+									data: {
+										userId: $("#findPw_id").val()
+									}, 
+									success: function(){
+										console.log(obj);
+										
+									}, error: function(e){
+										console.log(e);
+									}
+								});
+								isRunning = false;
+							}
+						}, 1000);
+						isRunning = true;
+					}
+			
+					/*인증번호 작성 후 확인 버튼 누르면 페이지 이동*/
+					$("#btnPwCheck").on("click", function(){
+						$.ajax({
+							url: '/user/checkTemPw',
+							type: 'post',
+							data: {
+								userId: $("#findPw_id").val(), 
+								userPw: $("#tempPw").val()
+							}
+							, success: function(obj){
+								console.log(obj);
+								if(obj.item.pwMsg == "idFail"){
+										alert("존재하지 않는 아이디 입니다.");
+										return;
+									} else if(obj.item.pwMsg == "pwFail"){
+										alert("인증번호가 틀렸습니다.");
+										return;
+									} else {
+										$("#userId").val($("#findPw_id").val());
+										console.log($("#userId").val());
+										$("#pwChangeForm").submit();
+										//window.location.href = "/user/pwChangeView";	get방식으로 할 때는 쿼리스트링으로 작성해준다.
+									}
+							}, error: function(e){
+								
+							}
+							
+						});
+					});
+					
+					/* 비밀번호 찾기 관련 모달창 확인 누르면 사라지는 효과*/
+					$(".btnFindPwcheck").on("click", function(){
+						$(".ModalBox").modal('hide');
+					});
+						 
+					/*로그인화면으로 이동*/
+					$("#btnLoginView").on("click", function(){
+						location.href = '/user/loginView';
+					});												
+				});
+				
+				
+			</script>
+		</th:block>
+	</head>
+		
+	<body>
+		<div layout:fragment="content">
+			<div id="total_idPw">
+			  <div id="idPw_box">
+			    <div id="tap1" class="tap_box">
+			      <div class="tap_top">
+			        <div>
+			          <button type="button" class="tap_btn_01" id="btnIdView">아이디 찾기</button>
+			        </div>
+			        <div>
+			          <button type="button" class="tap_btn_02" id="btnPwView">비밀번호찾기</button>
+			        </div>
+			      </div>
+			      <div class="tap_body" id="idView">
+			      	<div class="tap_wrap_01">
+			      		<div class="find_box">
+			      			<div class="findName_img">
+			      				<img src="/images/userid.png" class="Name_img">
+					        </div>
+					        <input type="text" id="findId_name" placeholder="이름을 입력하시오.">
+					    </div>
+					    <div class="find_box">
+					    	<div class="findEmail_img">
+					        	<img src="/images/mail.png" class="email_img">
+					        </div>					        
+					       	<input text="text" id="findId_email" placeholder="이메일을 입력하시오.">
+					    </div>
+				        <div class="idPw_btn">
+				            <button type="button" id="btnIdCheck">확 인</button>
+				        </div>
+					</div>
+				</div>
+				<div class="tap_body" id="pwView" style="display:none;" >
+		        	<div class="tap_wrap_02">
+		        		<div class="find_box_02">
+							<div class="findName_img">
+								<img src="/images/userid.png" class="Name_img">
+						    </div>
+						    <input type="text" id="findPw_name" placeholder="이름을 입력하시오.">
+						</div>
+						<div class="find_box_02">
+						  <div class="findId_img">
+						    <img src="/images/idFind.png" class="id_img">
+						  </div>
+						  <input text="text" id="findPw_id"  placeholder="아이디를 입력하시오.">
+						</div>
+						<div class="find_box_cover">
+							<div class="find_box_02">
+							  <div class="findEmail_img">
+							    <img src="/images/mail.png" class="email_img">
+							  </div>
+							  <input text="text" id="findPw_email" placeholder="이메일을 입력하시오.">
+							</div>
+							<button type="button" id="sendTempPw" name="sendTempPw">인증번호 발송</button>	
+						</div>	      
+						<div id="tempPwBox">
+			            	<span>인증번호 : </span>
+			            	<input name="tempPw" id="tempPw"><span class="time"></span>
+			            </div>
+				        <div class="idPw_btn">
+				        	<button type="button" id="btnPwCheck">확 인</button>
+				        </div>
+			        </div>
+		        </div>
+		      </div>
+			</div>
+			<div class="goLoginBtn">
+				<button type="button" id="btnLoginView">로그인 화면으로</button>
+			</div>
+		</div>		
+		<!--아이디 찾기 성공 모달--> 
+		 <div id="myModal" class="modal fade ModalBox findIdModal" tabindex="-1">
+		   <div class="modal-dialog">
+		       <div class="modal-content findIdModal_box">
+		           <div class="modal-header findIdModal_top">
+		               <h5 class="modal-title"></h5>
+		               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		           </div>
+		           <div class="modal-body findIdModal_body">
+		               <p id="idText"></p>
+		           </div>
+		           <div class="modal-footer findIdModal_footer">
+		               <button type="button" class="btnFindIdcheck">확 인</button>
+		           </div>
+		       </div>
+		   </div>
+		</div>
+		<form id="pwChangeForm" action="/user/pwChangeView" method="post">
+		<input type="hidden" name="userId" id="userId">
+		</form>
+	    <!--아이디 찾기 실패 모달--> 
+		<div id="myModal" class="modal fade ModalBox findIdModal_not" tabindex="-1">
+		   <div class="modal-dialog">
+		       <div class="modal-content findIdModal_box">
+		           <div class="modal-header findIdModal_top">
+		               <h5 class="modal-title"></h5>
+		               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		           </div>
+		           <div class="modal-body findIdModal_body">
+		               <p>일치하는 회원정보를 찾지 못하였습니다.</p><br>
+		               <p>다시입력해주시기 바랍니다.</p>
+		           </div>
+		           <div class="modal-footer findIdModal_footer">
+		               <button type="button" class="btnFindIdcheck">확 인</button>
+		           </div>
+		       </div>
+		   </div>
+	   	</div>
+	    <!--비밀번호 찾기 성공 모달--> 
+	    <div id="myModal" class="modal fade ModalBox findPwModal" tabindex="-1">
+	      <div class="modal-dialog">
+	        <div class="modal-content findPwModal_box">
+	            <div class="modal-header findPwModal_top">
+	                <h5 class="modal-title"></h5>
+	                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	            </div>
+	            <div class="modal-body findPwModal_body">
+	              <p>인증번호를 이메일로 보내드렸습니다.</p><br>
+	              <p>확인하여 비밀번호를 변경해주시길 바랍니다.</p>
+	            </div>
+	            <div class="modal-footer findPwModal_footer">
+	                <button type="button" class="btnFindPwcheck">확 인</button>
+	            </div>
+	        </div>
+	     </div>
+	  </div>
+	  <!--비밀번호 찾기 실패 모달--> 
+	  <div id="myModal" class="modal fade ModalBox findPwModal_not" tabindex="-1">
+	     <div class="modal-dialog">
+	        <div class="modal-content findPwModal_box">
+	            <div class="modal-header findPwModal_top">
+	                <h5 class="modal-title"></h5>
+	                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	            </div>
+	            <div class="modal-body findPwModal_body">
+	                <p>인증번호가 일치하지 않습니다.</p><br>
+	                <p>다시입력해주시기 바랍니다.</p>
+	            </div>
+	            <div class="modal-footer findPwModal_footer">
+	                <button type="button" class="btnFindPwcheck">확 인</button>
+	            </div>
+	        </div>
+	     </div>
+	 </div>		
+   </div>
+	</body>
+</html>

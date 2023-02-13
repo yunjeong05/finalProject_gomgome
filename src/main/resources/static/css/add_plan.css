@@ -1,0 +1,185 @@
+
+/* *** CONTENT PART *** */
+#content_mypage {
+	width: 1070px;
+	padding: 30px 30px 30px 20px;
+	float: right;
+}
+
+
+
+
+
+#addplanLeft {
+	width: 560px; height: 700px;
+	float: left;
+}
+#addplanRight {
+	width: 440px; height: 700px;
+	float: right;
+}
+#addCalendar {
+	height: 670px;
+	z-index: 2;
+}
+.fc-btn00-button, .fc-btnm1-button, .fc-btnp1-button {
+	width: 39px;
+}
+
+.fc-btnMonth-button {
+	width: 57px;
+}
+
+
+#rightButton {
+	margin-top: 30px;
+	margin-bottom: 23px;
+	float: right;
+}
+#rightButton > input {
+	margin-left: 14px;
+	width: 100px; height: 40px;
+	line-height: 40px;
+}
+#rightContent {
+	clear: both;
+	
+}
+#rightUrl, #rightText {
+	height: 260px;
+}
+
+
+#newSchedule {
+	z-index: 1;
+	bottom: 20px;
+    position: fixed;
+    bottom: 0;
+    display: none;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 320px;
+    height: 370px;
+    overflow: hidden;
+    border: 1px solid #B5A27F; border-radius: 5px;
+    text-align: center;
+}
+
+#newSchedule .newScheduleTr {
+	margin-bottom: 40px;
+	clear:both;
+	align-items: center;
+}
+#newSchedule .newScheduleLeft {
+	float: left;
+	width: 70px; height: 30px;
+	line-height: 30px;
+	text-align: left;
+}
+#newSchedule .newScheduleRight {
+	float: right;
+	width: 190px;  height: 30px;
+}
+#newSchedule .newScheduleBtn input {
+	margin-top: 20px;
+	width: 70px; height: 25px;
+	border: 2px solid #B5A27F;
+	font-weight: bold;
+}
+.newScheduleRight.planTitle {
+	line-height: 30px;
+}
+#rightUrlTable > thead, tbody, th, td, tr {
+	border: 1px solid black;
+}
+
+#addSchedule {
+	z-index: 1;
+    display: none;
+    position: absolute;
+    
+    overflow: hidden;
+    /*border: 1px solid #B5A27F;*/ 
+    border-radius: 5px;
+}
+#newScheduleByDrag {
+	background-color: rgb(254, 136, 89);
+}
+#copyScheduleByDrag {
+	background-color: rgb(89, 136, 254);
+}
+
+
+#focusSchedule {
+	z-index: 1;
+    display: none;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid #B5A27F; border-radius: 5px;
+}
+#updateScheduleEvent {
+    background-color: lightblue;
+}
+#deleteScheduleEvent {
+    background-color: lightpink;
+}
+#moveScheduleEvent {
+	background-color: lemonchiffon;
+}
+
+#updateSchedule {
+	z-index: 1;
+	bottom: 20px;
+    position: fixed;
+    bottom: 0;
+    display: none;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 320px;
+    height: 370px;
+    overflow: hidden;
+    border: 1px solid #B5A27F; border-radius: 5px;
+    text-align: center;
+}
+
+#updateSchedule .updateScheduleTr {
+	margin-bottom: 40px;
+	clear:both;
+	align-items: center;
+}
+#updateSchedule .updateScheduleLeft {
+	float: left;
+	width: 70px; height: 30px;
+	line-height: 30px;
+	text-align: left;
+}
+#updateSchedule .updateScheduleRight {
+	float: right;
+	width: 190px;  height: 30px;
+}
+#updateSchedule .updateScheduleBtn input {
+	margin-top: 20px;
+	width: 70px; height: 25px;
+	border: 2px solid #B5A27F;
+	font-weight: bold;
+}
+.updateScheduleRight.planTitle,  .updateScheduleRight.select {
+	line-height: 30px;
+}
+
+
+
+#copySchedule {
+	z-index: 1;
+    position: fixed;
+    display: none;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 320px;
+    height: 370px;
+    border: 1px solid #B5A27F; border-radius: 5px;
+    text-align: center;
+}

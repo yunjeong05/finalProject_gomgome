@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko"
+   xmlns:th="http://www.thymeleaf.org"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{layouts/layout}">
+   
+
+   <!-- head 영역 시작 -->
+   <!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+   <head>
+      <th:block layout:fragment="css">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+         <link rel="stylesheet" th:href="@{/css/community_reg.css}">
+          <link rel="stylesheet" th:href="@{/css/community_reg_layout.css}">
+      </th:block>
+      <th:block layout:fragment="script">
+         <script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+         <script th:src="@{/js/common.js}"></script>
+      </th:block>
+   </head>
+   <!-- head 영역 끝 -->
+  
+   
+   <body id="wrap"> 
+   <div layout:fragment="content">  
+    <div id="community">
+        <div class="wrap">
+            <div class="title">커뮤니티 글 수정하기</div>
+            <form action="/community/communityModify" method="post">
+            	<input type="hidden" name="communityNo" th:value="${community.communityNo}">
+	            <div class="form">
+	                <dl>
+	                    <dt>게시판</dt>
+	                    <dd>
+	                        <select name="communityType">
+	                            <option value="0" th:selected="${community.communityType == 0 || community.communityType == null || community.communityType == ''}">게시판을 선택해주세요.</option>
+	                            <option value="1" th:selected="${community.communityType == 1}">학습법PR</option>
+	                            <option value="2" th:selected="${community.communityType == 2}">공부도움받기</option>
+	                            <option value="3" th:selected="${community.communityType == 3}">자유게시판</option>
+	                        </select>
+	                    </dd>
+	                </dl>
+	                <dl>
+	                    <dt>제목</dt>
+	                    <dd>
+	                        <input type="text" placeholder="제목을 입력하세요." name="communityTitle" th:value="${community.communityTitle}">
+	                    </dd>
+	                </dl>
+	                <dl>
+	                    <dt class="skip">내용</dt>
+	                    <dd>
+	                        <textarea placeholder="내용을 입력하세요." name="communityContent" th:text="${community.communityContent}"></textarea>
+	                    </dd>
+	                </dl>
+	                <dl>
+	                    <dt>첨부파일</dt>
+	                    <dd>
+	                        <div class="file">
+	                            <span class="text">
+	                            	<th:block th:each="file : ${fileList}" th:text="${file.fileName}">
+	                            	</th:block>
+	                            </span>
+	                            <label class="attach"><input type="file">첨부파일 추가</label>
+	                        </div>
+	                    </dd>
+	                </dl>
+	            </div>
+	            <div class="button">
+	                <a href="javascript:history.back();" class="btn btn_02">취소</a>
+	                <button type="submit" class="btn btn_01">수정</button>
+	            </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</body>
+
+
+</html>

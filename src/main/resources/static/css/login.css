@@ -1,0 +1,168 @@
+#login_box {
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+#login_title{
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 100px auto 100px auto;
+}
+
+#login_section01{
+  margin: 10px auto;
+  width: 300px;
+  height: 40px;
+  display: flex;
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  border-left: 1px solid #FFFFFF;
+  border-radius: 5px;
+}
+ 
+#img_id_wrap{
+  background-color: #D8C6A6;
+  width: 16%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#img_id {
+  width: 30px;
+  height: 30px;     
+}
+
+#login_id {
+  width: 84%;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#login_section02{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 300px;
+  height: 40px;     
+  display: flex;
+  position: relative;
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  border-left: 1px solid #FFFFFF;
+  border-radius: 5px;
+}
+
+#img_pw_wrap01{
+  background-color: #D8C6A6;
+  width: 16%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#img_pw{
+  width: 30px;
+  height: 30px;
+}
+
+#login_pw{
+  width: 84%;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#img_eye02{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#img_eye01{
+  display:none;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+#login_section03{
+  margin-bottom: 10px;
+}
+
+#btnLogin_real{
+    width: 300px;
+    height: 40px;
+    border: 1px solid #B5A27F; 
+    border-radius: 5px;
+    background-color: #B5A27F; 
+    color:#FFFFFF; 
+    font-size: 0.9rem; 
+    font-weight: bold;
+}
+
+#login_kakao{
+  margin: 10px auto; 
+  width: 300px;
+  height: 40px;
+}
+
+#login_naver{
+  margin: 0 auto;
+  width: 300px;
+}
+
+#find_box{
+  display: flex;  
+  justify-content: center; 
+  margin: 20px auto;
+}
+
+#find_wrap_id{
+  display: inline-block;
+  margin-right: 20px;
+}
+ 
+#find_id{
+   color:#B5A27F;
+   font-size: 0.9rem; 
+   text-decoration: underline;
+   font-weight: bold;       
+}
+
+#find_pw{
+  color:#B5A27F;
+  font-size: 0.9rem; 
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#login_join{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+#btnJoin_real{
+  width: 300px;
+  height: 40px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 2px solid #B5A27F; 
+  border-radius: 5px;
+  color:#B5A27F;
+  font-size: 1rem; 
+  font-weight: bold;   
+}

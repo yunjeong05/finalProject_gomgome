@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+<!-- head 영역 시작 -->
+<!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+<head>
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+		<link rel="stylesheet" th:href="@{/css/main.css}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+		<script th:src="@{/js/main.js}"></script>
+		<script th:src="@{/js/todayMyAllSchedule.js}"></script>
+		<script th:inline="javascript">
+			const likePlanList = /*[[${likePlanList}]]*/;					
+			const pagelikePlanList = /*[[${pagelikePlanList}]]*/;	
+			const userCheck = /*[[${#authentication.principal}]]*/;				
+			const allDaySchedule = /*[[${allDaySchedule}]]*/;				
+		</script>
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var events = [];
+			for(i=0; i<allDaySchedule.length ;i++) {
+				const planObj = {
+						title: allDaySchedule[i].scheduleContent,
+						start: allDaySchedule[i].scheduleStartTime,
+						end: allDaySchedule[i].scheduleEndTime,
+					};
+					events.push(planObj);
+			}
+			console.log(events)
+		    var calendarEl = document.getElementById('calendar');
+		    var calendar = new FullCalendar.Calendar(calendarEl, {
+		      initialView: 'timeGridDay',
+		      nowIndicator: true,
+		      events: events
+		    });
+		
+		    calendar.render();
+		  });
+		</script>
+	</th:block>
+</head>
+<!-- head 영역 끝 -->
+
+<body>
+<div layout:fragment="content">
+<section class="banner" sec:authorize="!isAuthenticated()">
+  <div class="swiper">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <a class="scene swiper-slide" >
+          <div class="scene_content" style="background-color: black">
+            <div class="container">
+              <div class="cover_right">
+                <img class="banner-pc-image" src="/images/pic1.webp" alt="pic1">
+              </div>
+              <div id="cover_left_9" data-color="#59cf92" class="cover_left">
+                <div class="hero-tags">
+                  <div style="color:#000000;background-color:#5fdc28;">고민은 이제 그만!</div>
+                </div>
+                <h1 class="admin_hero_title title is-3 bold" style="color: #ffffff;">하루 계획을 한눈에 보는 
+플래너 "GOMGOME"🐣</h1>
+                <p class="text is-1" style="color: #ffffff">GOMGOME를 선택해야하는 이유!</p>
+              </div>
+            </div>
+          </div>
+        </a>
+            
+        <a class="scene swiper-slide" >
+          <div class="scene_content" style="background-color: #00a3ff;">
+            <div class="container">
+              <div class="cover_right">
+                <img class="banner-pc-image" src="/images/pic2.webp" alt="pic2">
+              </div>
+              <div id="cover_left_9" data-color="#59cf92" class="cover_left">
+                <div class="hero-tags ">
+                  <div style="color:#000000;background-color:#ffe21d;">빠르게 경험하는 성장</div>
+                </div>
+                <h1 class="admin_hero_title title is-3 bold" style="color: #ffffff;">플래너를 이용해 목표를 달성한 
+사람들의 이야기!⏰</h1>
+                <p class="text is-1" style="color: #ffffff">학습법 PR에서 만나보세요~
+오늘부터 나도 프로 완강러</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="scene swiper-slide" >
+          <div class="scene_content" style="background-color: #38e5ff;">
+            <div class="container">
+              <div class="cover_right">
+                <img class="banner-pc-image" src="/images/pic3.gif" alt="pic3">
+              </div>
+              <div id="cover_left_9" data-color="#59cf92" class="cover_left">
+                <div class="hero-tags ">
+                  <div style="color:#ffffff;background-color:#6344ec;">추천 학습 로드맵</div>
+                </div>
+                <h1 class="admin_hero_title title is-3 bold" style="color: #000000;">나와 같은 목표를 가진 사람들의
+카테고리별 TOP 5를 확인해보자! 📖</h1>
+                <p class="text is-1" style="color: #000000">시험부터 운동계획까지,
+많은 사람이 공감한 PICK! 🔥</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="pagination-container">
+        <div class="container aa">
+          <div class="swiper-pagination-controller">
+            <div class="index-wrapper"></div>
+            <div class="control-wrapper">
+              <button type="button" class="control-previous-button">
+                <
+              </button>
+              <div class="control-play-pause-button" value="stop">
+              	<svg width="14px" height="14px" enable-background="new 0 0 155.3 159.3" viewBox="0 0 155.3 159.3" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="m62 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c-.1 1.8-1.6 3.3-3.4 3.3z"></path><path fill="#ffffff" d="m106.6 135.3h-13.3c-1.9 0-3.4-1.5-3.4-3.4v-104.6c0-1.9 1.5-3.4 3.4-3.4h13.3c1.9 0 3.4 1.5 3.4 3.4v104.7c0 1.8-1.5 3.3-3.4 3.3z"></path></svg>
+              	<i class="fas fa-play" style="display: none;"></i>
+              </div>
+              <button type="button" class="control-next-button">
+                >
+              </button>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="swiper-pagination-wrapper"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="schedule" sec:authorize="isAuthenticated()">
+  <input id="achievementRate" type="hidden" th:value="${achievementRate}">
+  <div class="schedule_container">
+    <div class="schedule_container_wrapper">
+      <div class="left">
+        <div id='calendar'></div>
+      </div>
+      <div class="right">
+        <div class="right_top">
+          <div class="right_top_title">오늘의 목표 진행률</div>
+          <div id="achBack">
+          	<div id="achFront"></div>
+          </div>
+        </div>
+        <div class="right_bottom">
+          <div class="right_bottom_title">
+	          <span>오늘의 할 일</span>
+	          <div><a th:href="@{/mypage/todo_date}">일정 자세히 보기</a></div>
+          </div>
+          <div class="right_bottom_content" style="margin-top: 5px; height: 150px; overflow-y: scroll; background-color: #B5A27F;">
+            <ul class="real-content" th:each="list : ${allDaySchedule}">
+            	<li th:text="${list.scheduleContent}"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="main_menu" sec:authorize="isAuthenticated()">
+  <div class="main_menu_list">
+    <div class="main_menu_name" id="main_like_plan_a" sec:authorize="isAuthenticated()">내 마음에 든 플랜</div>
+    <div class="main_menu_name" id="main_plan_a">지금 인기있는 플랜</div>
+  </div>
+</section>
+<section id="likePlan_main" sec:authorize="isAuthenticated()">
+	<div class="planCate_select">
+	  <div class="planCateSub">
+	    <div id="sub_container">
+	    	<div class="item" th:each="list : ${pagelikePlanList.content}">
+	    		<div class="plan_image" style="height: 70%;"><img src="/images/planCover.jpg" alt="표지이미지"></div>
+		        <div>
+		          <div class="plan_content_title"><a th:href="@{/planner/updatePlanCnt/{planNO}(planNO = ${list.planNo})}" 
+		          th:text="${list.planName}" onclick="window.open(this.href, '_blank', 'width=1100px, height=900px'); return false;"></a></div>
+		          <div class="plan_content_cnt_like">
+			          <div class="plan_content_cnt" th:text="${list.userId}"></div>
+			          <div class="plan_content_like_btn">
+			          	<img class="plan_content_like_img" th:attr="data=${list.planNo}" src="/images/like_yes.png" alt="하트자리">
+			          </div>
+			      </div> 
+		        </div>
+	   		</div>
+	    </div>
+	    	<ul class="pagination"></ul>
+		    <ul class="pagination" th:if="${pagelikePlanList.totalElements > 0}"
+								   th:with="pageNumber = ${pagelikePlanList.pageable.pageNumber},
+										    pageSize = ${pagelikePlanList.pageable.pageSize},
+										    totalPages = ${pagelikePlanList.totalPages},
+										    startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
+										    tempEndPage = ${startPage + pageSize - 1},
+										    endPage = ${tempEndPage > totalPages ? totalPages : tempEndPage}">
+				<li class="pagination_button" th:if="${pageNumber > 0}">
+					<a th:href="@{/planner/planMain(
+											page=${pageNumber - 1}
+											)}">이전</a>
+				</li>
+			
+			
+				<li class="pagination_button" th:each="page : ${#numbers.sequence(startPage, endPage)}">
+					<a th:href="@{/planner/planMain(
+											page=${page -1 })}" th:text="${page}"></a>
+				</li>
+			
+				<li class="pagination_button" th:if="${pageNumber < totalPages - 1}">
+					<a th:href="@{/planner/planMain(
+											page=${pageNumber + 1}
+											)}">다음</a>
+				</li>
+			</ul>
+	    </div>
+	  </div>
+</section>
+<section class="main_content">
+  <div class="plan_title">누적 조회수 최다 플랜</div>
+  <input type="hidden" id="planViewCntMax" th:value="${planViewCntMax}">
+  <div class="swiper plan_swiper" id="planViewCntMax">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide plan" th:each= "planViewCntMax : ${planViewCntMax}">
+        <div class="plan_image" style="height: 70%;"><img src="/images/planCover.jpg" alt="표지이미지"></div>
+        <div>
+          <div class="plan_content_title"><a th:href="@{/planner/updatePlanCnt/{planNO}(planNO = ${planViewCntMax.planNo})}" 
+          th:text="${planViewCntMax.planName}" onclick="window.open(this.href, '_blank', 'width=1100px, height=900px'); return false;" ></a></div>
+          <!--<div class="plan_content_userId">작성자</div>-->
+          <div class="plan_content_cnt_like">
+	          <div class="plan_content_cnt" th:text="'조회수 ' + ${planViewCntMax.planViewCnt}"></div>
+	          <div class="plan_content_like_btn">
+		        <div class="plan_content_like_cnt" th:text="${planViewCntMax.planLikeCnt}"></div>
+	          	<img class="plan_content_like_img" th:name="${planViewCntMax.planNo}" th:attr="data=${planViewCntMax.planNo}" src="/images/like_no.png" alt="하트자리">
+	          </div>
+	      </div>    
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <div class="plan_title">여성 인기 플랜</div>
+  <div class="swiper plan_swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide plan" th:each= "planViewCntMaxFemale : ${planViewCntMaxFemale}">
+        <div class="plan_image" style="height: 70%;"><img src="/images/planCover.jpg" alt="표지이미지"></div>
+        <div>
+          <div class="plan_content_title"><a th:href="@{/planner/updatePlanCnt/{planNO}(planNO = ${planViewCntMaxFemale.planNo})}" 
+          th:text="${planViewCntMaxFemale.planName}" onclick="window.open(this.href, '_blank', 'width=1100px, height=900px'); return false;" ></a></div>
+          <!--<div class="plan_content_userId">작성자</div>-->
+          <div class="plan_content_cnt_like">
+	          <div class="plan_content_cnt" th:text="'조회수 ' + ${planViewCntMaxFemale.planViewCnt}"></div>
+	          <div class="plan_content_like_btn">
+		        <div class="plan_content_like_cnt" th:text="${planViewCntMaxFemale.planLikeCnt}"></div>
+	          	<img class="plan_content_like_img" th:name="${planViewCntMaxFemale.planNo}" th:attr="data=${planViewCntMaxFemale.planNo}" src="/images/like_no.png" alt="하트자리">
+	          </div>
+	      </div> 
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <div class="plan_title">남성 인기 플랜</div>
+  <div class="swiper plan_swiper">
+    <div class="swiper-wrapper">
+	  <div class="swiper-slide plan" th:each= "planViewCntMaxMale : ${planViewCntMaxMale}">
+        <div class="plan_image" style="height: 70%;"><img src="/images/planCover.jpg" alt="표지이미지"></div>
+        <div>
+          <div class="plan_content_title"><a th:href="@{/planner/updatePlanCnt/{planNO}(planNO = ${planViewCntMaxMale.planNo})}" 
+          th:text="${planViewCntMaxMale.planName}" onclick="window.open(this.href, '_blank', 'width=1100px, height=900px'); return false;" ></a></div>
+          <!--<div class="plan_content_userId">작성자</div>-->
+          <div class="plan_content_cnt_like">
+	          <div class="plan_content_cnt" th:text="'조회수 ' + ${planViewCntMaxMale.planViewCnt}"></div>
+	          <div class="plan_content_like_btn">
+		        <div class="plan_content_like_cnt" th:text="${planViewCntMaxMale.planLikeCnt}"></div>
+	          	<img class="plan_content_like_img" th:name="${planViewCntMaxMale.planNo}" th:attr="data=${planViewCntMaxMale.planNo}" src="/images/like_no.png" alt="하트자리">
+	          </div>
+	      </div> 
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</section>
+</div>
+</body>
+</html>

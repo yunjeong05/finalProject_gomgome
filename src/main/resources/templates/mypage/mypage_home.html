@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+	<!-- layout:decorate="~{layouts/layout_myplan}">-->
+	<!-- head 영역 시작 -->
+	<!-- 개별적으로 사용할 css, js 링크 걸기 위해 남겨둠 -->
+	<head>
+		<th:block layout:fragment="script">
+			<script>
+				$(function() {
+					console.log("th");
+				});
+			</script>
+		</th:block>
+	</head>
+	<!-- head 영역 끝 -->
+		
+	
+	<body>
+	<!--div layout:fragment="contentMypage" id="sidebar_mypage"-->
+	<div layout:fragment="contentMypage">
+		<div id="sidebar_mypage">
+			<div class="myPageTitle">
+				My Page
+			</div>
+			<ul class="sidebarWrapper">
+				<li class="sidebarMenu">
+					<a href="#" class="menu" id="btnTotalPlan">전체 계획</a>
+				</li>
+				<li class="sidebarMenu">
+					<a href="#" class="menu" id="btnTodoDate">
+						오늘의 할 일
+						<!--span class="fa fa-caret-down" style="color: black;"></span-->	
+					</a>
+					<ul class="todoDateSub">
+					</ul>
+				</li>
+				<li class="sidebarMenu">
+					<a href="#" class="menu" id="btnClosed">
+						지난 플랜들
+						<!--span class="fa fa-caret-down" style="color: black;"></span-->	
+					</a>
+					<ul class="closedSub">
+					</ul>
+				</li>
+				<li class="sidebarMenu">
+					<a class="menu" id="btnStatistic">
+						통계
+						<!--span class="fa fa-caret-down" style="color: black;"></span-->	
+					</a>
+					<ul class="statisticSub">
+						<li class="statisticSubMenu"><a href="#">달력</a></li>
+	                  	<li class="statisticSubMenu"><a href="#">그래프</a></li>
+					</ul>
+				</li>
+				<li class="sidebarMenu">
+					<a href="#" class="menu" id="btnLikePlan">찜한 플랜</a>
+				</li>
+				<li class="sidebarMenu">
+					<a href="#" class="menu" id="btnNote">내 노트</a>
+				</li>
+			</ul>
+			</div>
+		<div id="containerMypage">
+			
+		</div>
+		
+		<!--a th:href="@{/mypage/total_plan}" id="totalPlan">전체계획</a><br>
+		<a th:href="@{/mypage/todo_date}" id="todoDate">오늘의할일</a><br>
+		<a th:href="@{/mypage/add_plan}" id="addPlan">플랜n</a><br>
+		<a th:href="@{/mypage/closed}" id="closed">지난 플랜들</a><br>
+		<a th:href="@{/mypage/statistic_calendar}" id="calendar">통계-달력</a><br>
+		<a th:href="@{/mypage/statistic_graph}" id="graph">통계-그래프</a><br>
+		<a th:href="@{/mypage/like_plan}" id="likePlan">찜한플랜</a><br>
+		<a th:href="@{/mypage/my_note}" id="myNote">내노트</a><br-->
+		
+	</div>
+	</body>
+	
+</html>

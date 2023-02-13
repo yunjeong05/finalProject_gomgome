@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+
+#wrap .wrap{position:relative;margin:0 auto;width:790px;max-width:100%;height:auto}
+
+#community{padding: 100px 0;}
+#community .title{line-height: 36px;font-size: 32px;color: #B5A27F;margin-bottom: 30px;padding-bottom: 30px;border-bottom: 1px solid #c0c0c0;}
+
+#community .form dl{display:flex}
+#community .form dl + dl{margin-top:20px;}
+#community .form dt{width:20%;flex-shrink:0;line-height:40px;font-weight: 500;}
+#community .form dd{flex:1;}
+#community .form input[type="text"]{width:100%;height:40px;border-radius:3px;border:1px solid #e0e0e0;padding:0 12px;font-size:14px}
+#community .form select{width:100%;height:40px;border-radius:3px;border:1px solid #e0e0e0;padding:0 12px;font-size:14px;}
+#community .form select option[value=""]{display:none;}
+#community .form textarea{width:100%;height: 340px;border-radius:3px;border:1px solid #e0e0e0;padding:12px 12px;font-size:14px}
+#community .form .file{display:flex;}
+#community .form .file input{display: none;}
+#community .form .file .text{width:100%;height:40px;border-radius:3px;border:1px solid #e0e0e0;padding:0 12px;font-size:14px;display: flex;align-items: center;justify-content: flex-start;}
+#community .form .file .attach{margin-left:10px;background: #B5A27F;width: 140px;border-radius: 3px;color: #ffffff;font-size: 14px;display: flex;align-items: center;justify-content: center;cursor: pointer;flex-shrink: 0;}
+#community .button{display: flex;align-items: center;justify-content: center;position: absolute;top: 0;right: 0;}
+#community .button .btn{display: flex;align-items: center;justify-content: center;font-size: 16px;min-width: 140px;height: 36px;padding: 0 30px;border: 1px solid transparent;border-radius: 3px;text-align: center;}
+#community .button .btn + .btn{margin-left: 10px;}
+#community .button .btn_01{background: #B5A27F;border-color: #B5A27F;color: #ffffff;}
+#community .button .btn_02{background: #fff;border-color: #B5A27F;color: #B5A27F;}
+
+

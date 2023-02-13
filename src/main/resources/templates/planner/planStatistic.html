@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+<!-- head 영역 시작 -->
+<!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+<head>
+	<th:block layout:fragment="css">
+  	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+		<link rel="stylesheet" th:href="@{/css/planStatistic.css}">
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:src="@{/js/planStatistic.js}"></script>
+	</th:block>
+</head>
+<!-- head 영역 끝 -->
+
+<body>
+<div class="container" layout:fragment="content">
+<div id="statistic">
+    <div class="statistic_title">순위</div>
+    <div class="statistic_wrapper">
+      <div id="statistic_day">
+        <div class="statistic_subtitle">일일 공부시간 순위</div>
+        <div class="statistic_user_wrapper">
+	        <div class="statistic_user" th:each = "dayRank : ${dayRank}">
+	          <div class="ranking"><div></div></div>
+	          <div class="userInfo">
+	            <img src="/images/user.png" alt="유저">
+	            <div class="userPri">
+	              <div class="userName" th:text="${dayRank.userId}"></div>
+	              <div class="userRecord" th:text="${dayRank.statisticUserStudyhourDate}"></div>
+	            </div>
+	          </div>
+	        </div>
+	    </div>    
+      </div>
+      <div id="statistic_total">
+        <div class="statistic_subtitle">누적 공부시간 순위</div>
+        <div class="statistic_user_wrapper">
+	        <div class="statistic_user" th:each = "totalRank : ${totalRank}" th:if="${not #strings.isEmpty(totalRank.statisticUserStudyhourDate)}">
+	          <div class="ranking"><div></div></div>
+	          <div class="userInfo">
+	            <img src="/images/user.png" alt="유저">
+	            <div class="userPri">
+	              <div class="userName" th:text="${totalRank.userId}">김떙떙</div>
+	              <div class="userRecord" th:text="${totalRank.statisticUserStudyhourDate}">00:00:00</div>
+	            </div>
+	          </div>
+	        </div>
+        </div>
+      </div>
+      <div id="statistic_achieve">
+        <div class="statistic_subtitle">달성률 순위</div>
+        <div class="statistic_user_wrapper">
+	        <div class="statistic_user" th:each = "achieveRank : ${achieveRank}">
+	          <div class="ranking"><div></div></div>
+	          <div class="userInfo">
+	            <img src="/images/user.png" alt="유저">
+	            <div class="userPri">
+	              <div class="userName" th:text="${achieveRank.userId}"></div>
+	              <div class="userRecord" th:text="${achieveRank.statisticAchievementRate} + '%'"></div>
+	            </div>
+	          </div>
+	        </div>
+      	</div>
+      </div>
+      <div id="statistic_plan">
+        <div class="statistic_subtitle">인기 있는 플랜 순위</div>
+        <div class="statistic_user_wrapper">
+	        <div class="statistic_user" th:each = "LikeRank : ${LikeRank}">
+	          <div class="ranking"><div></div></div>
+	          <div class="userInfo">
+	            <img src="/images/user.png" alt="유저">
+	            <div class="userPri">
+	              <div class="userName" th:text="${LikeRank.userId}"></div>
+	              <div class="userRecord" th:text="${LikeRank.planName}"></div>
+	            </div>
+	          </div>
+	        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

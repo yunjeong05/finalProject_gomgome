@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<!-- head 영역 시작 -->
+	<!-- layout으로 잡히는 모든 html의 head 영역을 config.html로 대체 -->
+	<head th:replace="/fragments/config :: config">
+	
+	
+	</head>
+	<!-- head 영역 끝 -->
+	<body>
+			  <!-- 실제 파일이름 및 경로를 작성해주어야한다!! /// header_admin.html에 있는 th:fragment="여기값을 작성해줌"-->
+		<header th:replace="/fragments/header_admin :: header_admin"></header>
+		
+		<div th:replace="/fragments/remoteControl :: remoteControl"></div>
+		
+		<div layout:fragment="content"></div><!--이걸(선언문)로 무조건 감싸줘야 내용이 출력된다. div로 만들어줘야함-->
+		
+		<footer th:replace="/fragments/footer :: footer"></footer>
+		
+	</body>	
+
+</html>

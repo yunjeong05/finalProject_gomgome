@@ -1,0 +1,79 @@
+.btn {
+	padding: 0;
+}
+.remoteCon {
+   position: fixed;
+   bottom: 20px;
+   right: 0px;
+   width: 120px;
+   display: flex;
+   flex-direction: column;
+   /*text-align: center;*/
+      z-index: 999;
+}
+.rmcImg {
+   width: 100%;
+}
+/*.popup-note {
+	position: relative;
+	background: black;
+}*/
+.noteBtn {
+	display: flex;
+	justify-content: space-between
+}
+.noteBtn #modal_save .save_wrapper {
+	width: 60px;
+	border: 1px solid #333;
+}
+.noteBtn .close {
+	line-height: 16px;
+}
+/*right:150px 주는 순간 포스트잇 산책을 시작해요...*/
+.content-note {
+	position: absolute;
+	bottom: 20px;
+    position: fixed;
+    bottom: 0;
+    display: none;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+ }
+.content-note {
+    background: url(/images/post-it.png);
+    background-size: cover;
+}
+ textarea {
+    width: 100%; 
+    height: 80%; 
+    background-color: transparent; 
+    border: none; 
+    resize: none;
+}
+textarea:focus { 
+    outline: none; 
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-align: none;
+    cursor: pointer;
+}
+.save_wrapper {
+	text-align: center;
+}
+
+#gomgomeChatbot {
+	display: none;
+}

@@ -1,0 +1,148 @@
+
+/* *** CONTENT PART *** */
+#content_mypage {
+	width: 1070px;
+	padding: 30px 30px 30px 20px;
+	float: right;
+}
+
+/* *** TOTAL PLAN *** */
+#tododateLeft {
+	width: 560px; height: 700px;
+	float: left;
+}
+#todoCalendar {
+	height: 670px;
+}
+#tododateRight {
+	width: 440px; height: 700px;
+	/*background-color: lightblue;*/
+	float: right;
+	padding-top: 42px;
+}
+#tododateSelect {
+	width: 560px; height: 42px;
+	margin-bottom: 30px;
+	background-color: red;
+	line-height: 42px;
+}
+.tododateSelectTable {
+	border-collapse: separate;
+	border-spacing: 10px 0px;
+}
+
+.tododateSelectTable td {
+	background-color: #D8C6A6;
+	border-radius: 10px;
+	text-align: center;
+	font-weight: bold;
+}
+.tododateSelectTable .tableMonth {
+	width: 62px;
+	background-color: #B5A27F;
+}
+.tododateSelectTable .tableTd {
+	width: 42px;
+
+}
+.tododateSelectTable .tableTd:nth-child(6) {
+	background-color: #B5A27F;
+
+}
+.tododateSelectTable .tableLeft, .tableRight {
+	font-size: 20px;
+}
+
+#tododatePlan {
+	width: 560px; height: 600px;
+}
+
+.tododatePlanCalendarTable, .tododatePlanCalendarTable tr, .tododatePlanCalendarTable td {
+	border: 1px solid black;
+}
+.tododatePlanCalendarTable th {
+	width: 9.6%;
+}
+.tododatePlanCalendarTable .calendartableThead {
+	font-size: 1em;
+}
+.tododatePlanCalendarTable .calendarTableTbody tr {
+	line-height: 30px;
+}
+
+.fc-btn00-button, .fc-btnm2-button, .fc-btnm1-button, .fc-btnp1-button, .fc-btnp2-button {
+	width: 39px;
+}
+
+.fc-btnMonth-button {
+	width: 57px;
+}
+
+
+#tododateTotalstudyTop {
+	margin-bottom: 30px;
+}
+#tododateTotalstudyTitle, #tododateTotalstudyContent {
+	
+	font-size: 20px;
+}
+.tododateSelectPlan {
+	width: 260px;
+	text-align: left;
+}
+.tododateSelectPlan, .move2Plan {
+	height: 26px;
+}
+.displayTime {
+	display: inline-block;
+	width: 64px;
+}
+
+.displayTable {
+	display: none;
+}
+
+
+#tododatePlanTop {
+	margin-bottom: 10px;
+}
+#tododatePlanTitle, #tododatePlanContent {
+	
+	font-size: 20px;
+}
+#todoRightContent > tr, th, td {
+	border: 1px solid black;
+}
+
+.rotate{
+    -moz-transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+.rotate.down{
+    -ms-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

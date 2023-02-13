@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
+	<head>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+			</script>
+		</th:block>
+	</head>
+	<body>
+	<div th:fragment="remoteControl">
+		<div class="remoteCon">
+			<div class="memo" sec:authorize="isAuthenticated()">
+			  <div class="btnMemo">
+			  	<img class="rmcImg" src="/images/memo.png" alt="이미지 없음">
+			  </div>
+			  <div class="popup-note">
+			    <div class="content-note">
+			      <div class="noteBtn">
+			      	<div id="modal_date"></div>
+			        <div id="modal_save"><div class="save_wrapper">저장</div></div>
+			      	<div class="close">&times;</div>
+			      </div>
+			      <textarea id="noteContent" placeholder="메모를 입력해 주세요. 내 노트에 저장됩니다."></textarea>
+			    </div>
+			  </div>
+			</div>
+			<div class="calendar" sec:authorize="isAuthenticated()">
+				<img class="rmcImg" src="/images/calendar.png" alt="달력이미지">
+			</div>
+			<div class="stopwatch" sec:authorize="isAuthenticated()">
+				<img class="rmcImg" src="/images/stopwatch.png" alt="스톱워치이미지">
+			</div>
+			<div class="chatbot">
+				<form class="form-inline">
+					<img class="rmcImg" src="/images/chatbot.png" alt="챗봇이미지">
+				</form>
+			</div>
+			<div id="gomgomeChatbot">
+				<div class="chatbot_card">
+			    	<div class="chatbot_head">
+			      		<div class="chatbot-title">곰곰이 챗봇</div>
+			      		<form class="form-inline">
+			        		<div class="chatbot-close">
+								<!--<button id="connect" class="btn btn-default" type="submit">연결</button>-->
+			        			<!--<button id="disconnect" class="btn btn-default" type="submit" disabled="disabled"></button>-->
+			     			</div>
+			      		</form>
+			    	</div>
+			    	<div class="chatbot_wrapper">
+			      		<div class="chatbat_massage_wrapper">
+			        		<div id="welcome">
+			          			<div id="welcome_msg">
+					            안녕하세요 곰곰이입니다~ <br>
+					            오늘도 곰곰이을 이용해주셔서 감사해요.<br>
+					            문의할 서비스 유형을 메세지로 보내주시면 자세히 안내 드릴게요!
+					          	</div>
+			        		</div>
+			        		<div id="communicate"></div>
+			      		</div>
+			    	</div>
+			    	<div class="chatbot_input_wrapper">
+			      		<div class="chatbot_input_wrapper_wrapper" >
+			        		<form class="form-inline">
+			          			<div>
+			            			<input type="text" id="msg" class="form-control" placeholder="내용을 입력하세요....">
+			          			</div>
+			          			<div>
+			          				<button id="send" class="btn btn-default" disabled type="submit">전송</button>
+			          			</div>
+			        		</form>
+			      		</div>
+			    	</div>
+			 	</div>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

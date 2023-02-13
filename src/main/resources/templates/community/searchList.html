@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+	<head>
+		<th:block layout:fragment="css">	
+			<link rel="stylesheet" type="text/css" th:href="@{/css/searchList.css}">
+		</th:block>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				$(function(){
+					/*더보기 버튼 클릭 시 해당 게시판으로 이동*/
+					$("#plan_more").on("click", function(){
+						location.href = '/community/prList';
+					});
+					
+					$("#help_more").on("click", function(){
+						location.href = '/community/howtoList';
+					});
+					
+					$("#board_more").on("click", function(){
+						location.href = '/community/bulletinList';
+					});
+					
+				});				
+			</script>
+		</th:block>
+	</head>
+		
+	<body>
+		<div layout:fragment="content">
+			  <div id="totalSearch">
+			    <div class="search-wrapper">
+			      <div class="search-title">
+			        <div class="search-main-title">커뮤니티 통합검색</div>
+			        <div class="search-sub-title" th:text="'\''+${searchKeyword}+'\''+ ' 검색 결과 입니다.'"></div>
+			      </div>
+			      <div class="search-result">
+			        <div class="search-result-wrapper">
+			          <div class="search-content-title">
+			            <div class="search-content-subtitle">학습법 PR <span th:text="${prCnt}"></span>건</div>
+			            <div class="search-more" id="plan_more">학습법PR 더보기</div>
+			          </div>
+			          <th:block th:if="${prCnt > 0}">
+				          <div class="search-result-detail" th:each="i: ${prCnt == 3 ? #numbers.sequence(0, prCnt - 1) : #numbers.sequence(0, #lists.size(prList) - 1)}">
+				            <div class="seach-userInfo">
+				              <img class="search-user-img" src="/images/user.png" alt="유저">
+				              <div class="search-user-name" th:text="${prList.get(i).userNickname}"></div>
+				              
+				              <div class="search-user-date" th:text="${#strings.substring(prList.get(i).communityRegdate, 0, 10)}"></div>
+				            </div>
+				            <div class="search-subtitle"><a th:href="@{#}" th:text="${prList.get(i).communityTitle}"></a></div>
+				            <div class="search-content-detail" th:text="${prList.get(i).communityContent}"></div>
+				          </div> 
+			          </th:block>
+			          <th:block th:if="${prCnt} == 0">
+			          	<p class="textNone">검색된 결과가 없습니다.</p>
+			          </th:block> 
+			        </div>
+			        <div class="search-result-wrapper">
+			          <div class="search-content-title">
+			            <div class="search-content-subtitle">공부도움받기 <span th:text="${studyCnt}"></span>건</div>
+			            <div class="search-more" id="help_more">공부도움받기 더보기</div>
+			          </div>
+			          <th:block th:if="${studyCnt > 0}">
+				          <div class="search-result-detail" th:each="i: ${studyCnt == 3 ? #numbers.sequence(0, studyCnt - 1) : #numbers.sequence(0, #lists.size(studyList) - 1)}">
+				            <div class="seach-userInfo">
+				              <img class="search-user-img" src="/images/user.png" alt="유저">
+				              <div class="search-user-name" th:text="${studyList.get(i).userNickname}"></div>
+				              <div class="search-user-date" th:text="${#strings.substring(studyList.get(i).communityRegdate, 0, 10)}"></div>
+				            </div>
+				            <div class="search-subtitle"><a th:href="@{#}" th:text="${studyList.get(i).communityTitle}"></a></div>
+				            <div class="search-content-detail" th:text="${studyList.get(i).communityContent}"></div>
+				          </div> 
+			          </th:block>
+			          <th:block th:if="${studyCnt} == 0">
+			          	<p class="textNone">검색된 결과가 없습니다.</p>
+			          </th:block>
+			        </div>
+			        <div class="search-result-wrapper">
+			          <div class="search-content-title">
+			            <div class="search-content-subtitle">자유게시판 <span th:text="${freeCnt}"></span>건</div>
+			            <div class="search-more" id="board_more">자유게시판 더보기</div>
+			          </div>
+			          <th:block th:if="${freeCnt > 0}">
+				          <div class="search-result-detail" th:each="i: ${freeCnt == 3 ? #numbers.sequence(0, freeCnt - 1) : #numbers.sequence(0, #lists.size(freeList) - 1)}">
+				            <div class="seach-userInfo">
+				              <img class="search-user-img" src="/images/user.png" alt="유저">
+				              <div class="search-user-name" th:text="${freeList.get(i).userNickname}"></div>
+				              <div class="search-user-date" th:text="${#strings.substring(freeList.get(i).communityRegdate, 0, 10)}"></div>
+				            </div>
+				            <div class="search-subtitle"><a th:href="@{#}" th:text="${freeList.get(i).communityTitle}"></a></div>
+				            <div class="search-content-detail" th:text="${freeList.get(i).communityContent}"></div>
+				          </div> 
+			          </th:block>
+			          <th:block th:if="${freeCnt} == 0">
+			          	<p class="textNone">검색된 결과가 없습니다.</p>
+			          </th:block>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+		</div>				
+	</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko"
+   xmlns:th="http://www.thymeleaf.org"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{layouts/layout}">
+   
+
+   <!-- head 영역 시작 -->
+   <!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+   <head>
+      <th:block layout:fragment="css">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+         <link rel="stylesheet" th:href="@{/css/list.css}">
+         <style>
+				.paging ul li {
+					display: inline-block;
+				}
+		</style>
+      </th:block>
+      <th:block layout:fragment="script">
+         <script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+         <script th:src="@{/js/common.js}"></script>
+         <script th:inline="javascript">
+         // const getNoticeList = /*[[${getNoticeList}]]*/;
+         </script>
+         <script>
+         
+         
+		    var swiper = new Swiper('.image', {	
+		        slidesPerView: 4,
+		        pagination: false,
+		        navigation: {
+		            nextEl: '.swiper-next',
+		            prevEl: '.swiper-prev',
+		        },
+		        spaceBetween: 28,
+		    });
+	    </script>
+         
+         <!--
+         <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+		-->
+	
+		 
+    
+    
+      </th:block>
+   </head>
+   <!-- head 영역 끝 -->
+   
+      
+
+   
+   
+   <body>   
+   <div layout:fragment="content"  id="wrap">
+  	<div id="learning">
+      <div class="wrap">
+
+      <div id="top">
+        <div id="top_section00">
+            <div id="top_section01">
+                <div class="title">공지사항</div> 
+            </div>
+            <div id="top_section02">
+                <div id="search">
+                  
+                  <div class="search_area" id="search_area">
+                      <input type="text" id="search_keyword"  style="font-size: 22px;" value="">
+                      <div><img src="/images/search01.png" alt="" name="btn_search" id="btn_search" height="25px"></div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+
+      
+      <div class="table">
+          <table>
+              <colgroup>
+                  <col style="width:300px">  
+                  <col style="width:100px"> 
+                  <col style="width:100px"> 
+              </colgroup>
+              <thead>
+                  <tr>                      
+                      <th>제목</th>
+                      <th>작성자</th>
+                      <th>등록일</th>
+                  </tr>
+              </thead>
+              <tbody>
+
+                  <tr th:each="noticeList : ${getNoticeList}">
+                      
+                      <td>
+                        <a th:text="${noticeList.noticeTitle}"
+                            th:href="@{/customercenter/noticeList/{noticeNo} (noticeNo=${noticeList.noticeNo})}">
+                        </a>
+                      </td>
+                      <td th:text="${noticeList.noticeAdmin}"></td>
+                      <td th:text="${noticeList.noticeRegdate eq null ? '' : #strings.substring(noticeList.noticeRegdate, 0, 10)}"></td>
+                    </tr>
+                   
+
+              </tbody>
+          </table>
+
+      </div>
+      <div class="paging">
+	      	<ul th:if="${getNoticeList.totalElements > 0}"
+			   th:with="pageNumber = ${getNoticeList.pageable.pageNumber},
+					    pageSize = ${getNoticeList.pageable.pageSize},
+					    totalPages = ${getNoticeList.totalPages},
+					    startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
+					    tempEndPage = ${startPage + pageSize - 1},
+					    endPage = ${tempEndPage > totalPages ? totalPages : tempEndPage}">
+	          <li th:if="${pageNumber > 0}">
+	          	<a th:href="@{/customercenter/noticeList(
+											page=${pageNumber - 1}
+										)}">&lt;</a>
+			  </li>
+			  
+			  <li th:each="page : ${#numbers.sequence(startPage, endPage)}">
+	          	<a th:href="@{/customercenter/noticeList(
+											page=${page - 1}
+										)}" th:text="${page}" class="current"></a>
+	          </li>	
+	          <li th:if="${pageNumber < totalPages - 1}">
+	          	<a th:href="@{/customercenter/noticeList(
+											page=${pageNumber + 1}
+										)}">&gt;</a>
+	          </li>
+	      </div>
+	      
+      <div class="button">
+	          <div class="fl"></div>
+	          <div class="fr">
+	              <a th:href="@{#}" class="btn btn_01">등록</a>
+			          </div>
+			      </div>
+  </div>
+  </div>
+
+
+</div>
+
+</body>
+</html>

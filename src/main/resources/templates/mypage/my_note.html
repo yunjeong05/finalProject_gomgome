@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout_myplan}">
+	  
+	<!-- head 영역 시작 -->
+	<!-- 개별적으로 사용할 css, js 링크 걸기 위해 남겨둠 -->
+	<head>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				const noteList = /*[[${noteList}]]*/;
+			</script>
+			<script th:src="@{/js/my_note.js}"></script>
+		</th:block>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/my_note.css}">
+		</th:block>
+		<!--th:block layout:fragment="script">
+			<script th:inline="javascript">
+				$(function() {
+					$(".btnUpdate").on("click", function() {
+						
+						let note = {
+							noteNo: $(this).attr("no"),
+							noteContent: $(this).attr("content")
+						};
+						console.log("noteDTO" + note);
+						$.ajax({
+							url: '/mypage/updateNoteAPI',
+							type: 'put',
+							data: {note: JSON.stringify(note)},
+							success: function(obj) {
+								console.log("success");
+							},
+							error: function(e) {
+								console.log(e);
+							}
+						});
+					});
+					
+					$(".btnDelete").on("click", function() {
+						console.log("no: " + $(this).attr("no"));
+						$.ajax({
+							url: '/mypage/deleteNoteAPI',
+							type: 'delete',
+							data: {noteNo: $(this).attr("no")},
+							success: function(obj) {
+								console.log("success");
+								$(this).closest('tr').remove();
+								location.reload();
+							},
+							error: function(e) {
+								console.log(e);
+							}
+						});
+					});
+				});
+			</script>
+		</th:block-->
+	</head>
+	<!-- head 영역 끝 -->
+		
+	
+	<body>
+		<div layout:fragment="content" id="content_mypage">
+			<div class="btnContainer">
+				<button type="button" class="deleteNote">삭제하기</button>
+			</div>
+			<hr style="clear: both;">
+			
+			
+				
+			<div class="noteContainer">
+				<!--div class="eachNote">
+					<img class="memoImg" src="/images/memo_beige.png" alt="메모 이미지 없음">
+					<div class="eachContent">
+						<input type="checkbox" style="zoom: 1.2;" value="">
+						<span class="noteRegDate" style="float: right; margin-right: 6px;">
+							2022-22-22
+						</span>
+						<hr style="clear: both;">
+						<span class="noteContent">
+							인간에 반짝이는 청춘은 이는 청춘에서만 오직 그들의 듣기만 뛰노는 부패뿐이다. 피어나기 용감하고 위하여 이상은 하는 있는 유소년에게서 청춘의 무엇을 있으랴? 있는 이상의 투명하
+						</span>
+						<button type="button">+</button>
+					</div>
+					
+				</div-->
+			</div>
+			
+			<div class="detailNote">
+				<div class="btnDetailContainer">
+					<button type="button" class="cancelDetail">X</button>
+					<span id="detailRegDate"></span>
+					<button type="button" class="btnDelete">삭제</button>
+					<button type="button" class="btnUpdate">수정</button>
+					<input id="detailNoteNo" type="hidden">
+				</div>
+				<hr>
+				<textarea id="textArea"></textarea>
+			</div>
+			
+			
+			<!--h2 style="height: 100px;">내노트 페이지</h2>
+			<h3>노트</h3>
+			<table style="border: 1px solid black; border-collapse: collapse;">
+				<tr>
+					<th>번호</th>
+					<th>내용</th>
+					<th>유저 이름</th>
+				</tr>
+				<tr th:each="note : ${noteList}">
+					<th th:with="no=${note.noteNo}" th:text="${no}"></th>
+					<th th:text="${note.noteContent}"></th>
+					<th th:text="${note.userId}"></th>
+					<th th:text="수정" th:attr="no=${note.noteNo}, content=${note.noteContent}" class="btnUpdate"></th>
+					<th th:text="삭제" th:attr="no=${note.noteNo}" class="btnDelete"></th>
+				</tr>
+			</table-->
+		</div>
+	</body>
+	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

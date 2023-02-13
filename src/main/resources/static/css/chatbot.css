@@ -1,0 +1,124 @@
+#gomgomeChatbot {
+	position:absolute;
+	right: 150px;
+	bottom: 0;
+}
+.chatbot_card {
+    width: 400px;
+    height: 600px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(231, 244, 248);
+  }
+
+  .chatbot_head {
+    position: relative;
+    margin: 0 auto;
+    padding: 15px;
+    border-radius: 20px 20px 0px 0px;
+    background-color: #b5a27f;
+    min-height: 15px;
+    line-height: 15px;
+    width: 100%;
+    height: 40px;
+  }
+  .chatbot-title {
+    position: absolute;
+    color: #ffffff;
+  }
+  .chatbot-close {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 20px;
+    background: url("/images/close.png") no-repeat center;
+  }
+  .chatbot_wrapper {
+    display: flex;
+    height: 510px;
+    align-items: center;
+    overflow: auto;
+  }
+  .chatbot_wrapper:-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+  .chatbot_input_wrapper {
+    height: 45px;
+    background-color: #b5a27f;
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    align-items: center;
+  }
+  .chatbat_massage_wrapper {
+    width: 95%;
+    height: 95%;
+    margin: 0 auto;
+  }
+  #welcome {
+    background-color: #D8C6A6;
+    border-radius: 10px;    
+  }
+  #welcome_msg {
+    line-height: 1.5;
+    padding: 15px;
+  }
+  .chatbot_input_wrapper_wrapper {
+    background-color: #D8C6A6;
+    margin: 0 auto;
+    width: 95%;
+    height: 60%;
+    border-radius: 5px;
+  }
+  .form-inline {
+    display: flex;
+    justify-content: space-between;
+  }
+  #msg {
+    width: 300px;
+    height: 100%;
+    border: none;
+    background-color:transparent;
+    
+  }
+  #msg:focus { outline: none; }
+  #send {
+    width: 100%;
+    height: 100%;
+    background: inherit; 
+    border:none; 
+    box-shadow:none; 
+    border-radius:5px;
+    /* padding:0; */
+    background-color: #ffffff;
+    margin: 0 5px 5px 0;
+  }
+  #disconnect{
+    background: inherit; 
+    border:none; 
+    box-shadow:none; 
+    border-radius:0; 
+    padding:0; 
+    overflow:visible; 
+    cursor:pointer;
+    width: 15px;
+    height: 15px;
+  }
+  #sendMsg {
+	  display: inline-block;
+	  float: right;
+	  background-color: #b5a27f;
+	  margin: 10px 0;
+	  padding: 5px;
+	  border-radius: 5px;
+	  line-height: 1.5;
+  }
+  #recieveMsg {
+	  display: inline-block;
+	  background-color: #D8C6A6;
+	  margin: 10px 0;
+	  padding: 5px;
+	  border-radius: 5px;
+	  line-height: 1.5;
+  }

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+   	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   	layout:decorate="~{layouts/layout_admin}">
+<head>
+	<th:block layout:fragment="css">
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+        <link rel="stylesheet" th:href="@{/css/admin_list.css}">
+ 	</th:block>
+ 	
+ 	
+ 	<th:block layout:fragment="script">
+ 		<script th:inline="javascript">
+ 	//    $(function(){
+    //        //돋보기 클릭 시 검색 정보 submit
+    //        $("#btn_search").on("click", function(){
+    //            $("#searchForm").submit();
+    //        });
+    //    });
+    
+ 		</script>
+ 	</th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div id="container">
+        <!-- top 영역 -->
+        <div id="top">
+            <div id="top_section00">
+                <div id="top_section01">
+                    <div id="title">
+                        공지사항
+                    </div>
+                </div>
+                
+                <!--<form id="searchForm" action="/admin/getNoticeList" method="get">-->
+	                <div id="top_section02">
+	                    <div id="search">
+	                        <select id="search_condition">
+	                            <option value="전체">전체</option>
+	                            <option value="숨김상태">숨김상태</option>
+	                        </select>
+	                        <div class="search_area" id="search_area">
+	                            <input type="text" id="search_keyword" value="">
+	                            <div><img src="/images/search.png" alt="" name="btn_search" id="btn_search" height="25px"></div>
+	                        </div>
+	                    </div>
+	                </div>
+                <!--</form>-->
+                
+            </div>
+        </div>
+        <!-- content 영역 -->
+        <div id="content">
+            <div id="content_section00">
+                <div id="content_section01">
+                    <table id="table">
+                        <tr class="tr">
+                            <td class="td" width="10%">번호</td>
+                            <td class="td" width="45%">제목</td>
+                            <td class="td" width="15%">숨김 상태</td>
+                            <td class="td" width="15%">등록자</td>
+                            <td class="td" width="15%">등록일</td>
+                        </tr>
+                        <tr class="tr">
+                            <td class="td"></td>
+                            <td class="td"></td>
+                            <td class="td"></td>
+                            <td class="td"></td>
+                            <td class="td"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="content_section02">
+                    <div id="btn_section">
+                    	<a href="/admin/insertNoticeView" id="btn_insert">등록</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- bottom 영역 -->
+        <div id="bottom">
+            <div id="bottom_section00">
+                <div id="bottom_section01">
+                    <div class="paging">
+                        <li class="li0">
+                            <a class="a" href="#">
+                                <span><</span>
+                            </a>
+                        </li>
+                    </div>
+                    <div class="paging">
+                        <li class="li0">
+                        	<a class="a" id="first_page" href="#">1</a>
+                        </li>
+                    </div>
+                    <div class = "paging">
+                        <li class="li0"><a href="#" class="a">2</a></li>
+                    </div>
+                    <div class="paging">
+                        <li class="li0"><a href="#" class="a">3</a></li>  
+                    </div>
+                    <div class="paging">
+                        <li class="li0"><a href="#" class="a">4</a></li>
+                    </div>
+                    <div class= "paging">
+                    <li class="li0"><a href="#" class="a">5</a></li>
+                    </div>
+                    <div class="paging">
+                        <li class="li0">
+                            <a href="#" class="a">
+                                <span>></span>
+                            </a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+</body>
+
+</html>

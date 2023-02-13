@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout_myplan}">
+	  
+	<!-- head 영역 시작 -->
+	<!-- 개별적으로 사용할 css, js 링크 걸기 위해 남겨둠 -->
+	<head>
+		<th:block layout:fragment="script">
+			
+			<script th:inline="javascript">
+				const scheduleList = /*[[${scheduleList}]]*/;
+				const focusDate = /*[[${focusDate}]]*/;	
+				const plan = /*[[${plan}]]*/;
+				const otherList = /*[[${otherList}]]*/;
+				
+			
+				
+			</script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js" charset = "UTF-8"></script>
+			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<script th:src="@{/js/add_plan.js}"></script>
+			<script th:src="@{/fullcalendar-6.0.3/dist/index.global.js}"></script>
+			
+		</th:block>
+		<th:block layout:fragment="css">
+			
+			<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+			<link rel="stylesheet" th:href="@{/css/add_plan.css}">
+		</th:block>
+	</head>
+	<!-- head 영역 끝 -->
+	
+	<body>
+		<div layout:fragment="content" id="content_mypage">
+			<div id="addplanLeft">
+				<input type="text" id="inAddCalendar" style="margin-bottom: 5px;" readonly>
+				<div id="addCalendar"></div>
+				
+				<div id="addSchedule">
+					<button type="button" id="newScheduleByDrag">일정 추가</button><br>
+					<button type="button" id="copyScheduleByDrag">복사한 일정</button>
+				</div>
+				<div id="focusSchedule">
+					<button type="button" id="updateScheduleEvent">일정 수정</button><br>
+					<button type="button" id="deleteScheduleEvent">일정 삭제</button><br>
+					<button type="button" id="moveScheduleEvent">링크 이동</button>
+				</div>
+				
+				
+				<div id="newSchedule">
+					<div id="newScheduleTitle">
+						<span>새로운 일정 추가</span>
+						<button type="button" class="closeNewPop" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div><hr>
+					<div class="newScheduleTr">
+						<span class="newScheduleLeft">
+							플랜 이름
+						</span>
+						<span class="newScheduleRight planTitle">
+						</span>
+					</div>
+					<div class="newScheduleTr">
+						<span class="newScheduleLeft">분류</span>
+						<select class="newScheduleRight select">
+							<option value="강의">강의</option>
+							<option value="참고사이트">참고사이트</option>
+							<option value="기타">기타</option>
+						</select>
+					</div>
+					<div class="newScheduleTr">
+						<span class="newScheduleLeft">
+							내용
+						</span>
+						<input type="text" class="newScheduleRight content" name="scheduleContent">
+					</div>
+					<div class="newScheduleTr">
+						<span class="newScheduleLeft">
+							URL
+						</span>
+						<input type="text" class="newScheduleRight url" name="scheduleSource">
+					</div>
+					<div class="newScheduleTr">
+						<span class="newScheduleLeft">
+							시작시간
+						</span>
+						<input type="time" class="newScheduleRight start" name="scheduleStartTime">
+					</div>
+					<div class="newScheduleTr">
+						<span class="newScheduleLeft">
+							마감시간
+						</span>
+						<input type="time" class="newScheduleRight end" name="scheduleEndTime">
+					</div>
+					<div class="newScheduleBtn">
+						<input class="btnNewScheduleCancel" type="button" value="취소하기">
+						<span style="width: 20px; display: inline-block;"></span>
+						<input class="btnNewScheduleSubmit" type="submit" value="저장하기">
+					</div>
+				</div>
+			</div>
+			
+			<div id="updateSchedule">
+				<div id="updateScheduleTitle">
+					<span>일정 수정하기</span>
+					<button type="button" class="closeUpdatePop" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div><hr>
+				<div class="updateScheduleTr">
+					<span class="updateScheduleLeft">
+						플랜 이름
+					</span>
+					<span class="updateScheduleRight planTitle">
+					</span>
+				</div>
+				<div class="updateScheduleTr">
+					<span class="updateScheduleLeft">분류</span>
+					<span class="updateScheduleRight select"></span>
+				</div>
+				<div class="updateScheduleTr">
+					<span class="updateScheduleLeft">
+						내용
+					</span>
+					<input type="text" class="updateScheduleRight content" name="scheduleContent">
+				</div>
+				<div class="updateScheduleTr">
+					<span class="updateScheduleLeft">
+						URL
+					</span>
+					<input type="text" class="updateScheduleRight url" name="scheduleSource">
+				</div>
+				<div class="updateScheduleTr">
+					<span class="updateScheduleLeft">
+						시작시간
+					</span>
+					<input type="time" class="updateScheduleRight start" name="scheduleStartTime">
+				</div>
+				<div class="updateScheduleTr">
+					<span class="updateScheduleLeft">
+						마감시간
+					</span>
+					<input type="time" class="updateScheduleRight end" name="scheduleEndTime">
+				</div>
+				<div class="updateScheduleBtn">
+					<input class="btnUpdateScheduleCancel" type="button" value="취소하기">
+					<span style="width: 20px; display: inline-block;"></span>
+					<input class="btnUpdateScheduleSubmit" type="submit" value="저장하기">
+				</div>
+			</div>
+			
+			
+			
+			<div id="copySchedule">
+				<!--select id="selectStorage">
+					
+				</select>
+				<button type="button" class="btnStorage">버튼</button-->
+				<button type="button" class="closeCopyTable" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<table id="tableBody">
+					<thead>
+						<tr>
+							<th>분류</th>
+							<th>내용</th>
+							<th>복사하기</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div id="addplanRight">
+				<div id="rightButton">
+					<input type="button" class="deletePlan" value="삭제하기">
+					<input type="button" class="updateSchedule" value="저장하기">
+				</div>
+				<div id="rightContent">
+					<div id="rightUrl">
+						<h2>등록한 일정들</h2>
+						<table id="rightUrlTable">
+							<thead>
+								<tr>
+									<th>분류</th>
+									<th>내용</th>
+									<th>URL</th>
+								</tr>
+							</thead>
+							<tbody>
+							
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout_myplan}">
+	  
+	<!-- head 영역 시작 -->
+	<!-- 개별적으로 사용할 css, js 링크 걸기 위해 남겨둠 -->
+	<head>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				const likePlanList = /*[[${likePlanList}]]*/;
+				const categoryList = /*[[${categoryList}]]*/;
+				const likeList = /*[[${likeList}]]*/;
+			</script>
+			<script th:src="@{/js/like_plan.js}"></script>
+		</th:block>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/like_plan.css}">
+		</th:block>
+	</head>
+	<!-- head 영역 끝 -->
+	
+	<body>
+		<div layout:fragment="content" id="content_mypage">
+			<div class="btnContainer">
+				<button type="button" class="deleteLike">삭제하기</button>
+			</div>
+			<hr style="clear: both;">
+			
+			<div class="planContainer"></div>
+
+		</div>
+	</body>
+	
+</html>

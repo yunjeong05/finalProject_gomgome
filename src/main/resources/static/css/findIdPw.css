@@ -1,0 +1,273 @@
+/* 아이디찾기 화면 
+#total_idPw{
+  display:flex;
+  flex-direction: column;
+  align-items: center;	
+}*/
+
+#idPw_box{
+ display:flex;
+  flex-direction: column;
+  align-items: center;	
+}
+
+.tap_box{
+  margin: 150px auto 50px auto;
+}
+
+.tap_top{
+  display:flex;	
+}
+
+.tap_btn_01{
+  width: 300px;
+  height: 60px;
+  margin: 0 auto;
+  border: 1px solid #B5A27F;
+  border-top-left-radius: 30px;
+  background: #B5A27F;
+  align-items: center;	
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+.tap_btn_02{
+  width: 300px;
+  height: 60px;
+  margin: 0 auto;
+  border: 1px solid #E0E0E0;
+  border-top-right-radius: 30px;
+  background: #E0E0E0;
+  align-items: center;	
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.7rem;	
+}
+
+.tap_body{
+  display:flex;	
+  width:600px;
+  height: 330px;
+  border: 2px solid #B5A27F;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background: #FFFFFF;
+}
+
+.tap_wrap_01{
+  justify-content: center;
+  margin: 70px auto 0px auto;
+  text-align: center;
+}
+
+.tap_wrap_02{
+  justify-content: center;
+  margin: 50px auto 0px auto;
+  text-align: center;
+}
+.find_box{
+  margin-top: 10px;
+  width: 300px;
+  height: 40px;
+  display: flex;
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  border-left: 1px solid #FFFFFF;
+  border-radius: 5px;
+}
+
+.find_box_02{
+  margin-top: 10px;
+  margin-left: 100px;
+  width: 300px;
+  height: 40px;
+  display: flex;
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  border-left: 1px solid #FFFFFF;
+  border-radius: 5px;	
+}
+
+.findName_img, .findId_img, .findEmail_img{
+  background-color: #D8C6A6;
+  width: 16%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;	
+}
+
+.Name_img, .email_img, .id_img{	
+  width: 30px;
+  height: 30px; 
+}
+
+#findId_name, #findId_email, #findPw_name,#findPw_id, #findPw_name, #findPw_email {
+  width: 84%;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#tempPwBox{
+  margin-top: 10px;
+}
+
+#tempPwBox{
+ font-weight: bold;
+}
+#tempPw{
+  width: 34%;
+  height: 35px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
+
+.time{
+ width: 7%;
+ height: 35px;
+ margin-left: 10px;	
+}
+.find_box_cover{
+  display:flex;
+}
+
+#sendTempPw{
+  justify-content: center;
+  width: 100px;
+  height: 38px;
+  margin: 10px auto 0px 5px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 0.8rem;
+  border: 3px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+}
+
+#btnPwCheck{
+  width: 300px;
+  height: 40px;
+  margin: 10px auto 10px auto;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 3px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+  align-items: center;
+}
+
+#btnIdCheck{
+  width: 300px;
+  height: 40px;
+  margin: 30px auto 10px auto;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 3px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+  align-items: center;
+}
+
+.goLoginBtn{
+  text-align: center;
+}
+
+#btnLoginView{
+  width: 300px;
+  height: 40px;
+  margin: 30px auto 100px auto;
+  color: #B5A27F;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 2px solid #B5A27F;
+  border-radius: 5px;
+  background: #FFFFFF;
+  justify-content: center;
+}
+
+/*아이디 찾기 결과 모달 CSS */
+.findIdModal_box{
+  border : 1px solid #B5A27F;
+  border-radius : 5px;
+}
+
+.findIdModal_top{
+ width: 500px;
+ height: 40px;
+ background-color: #B5A27F;
+}
+
+.findIdModal_body{
+ margin: 40px auto 20px auto;
+ text-align: center;
+ font-weight: bold;
+}
+
+.findIdModal_body p {
+  font-size: 1.1rem;
+}
+
+.findIdModal_footer{
+  justify-content: center;
+  border: none;
+}
+
+.btnFindIdcheck{
+  width: 150px;
+  height: 40px;
+  margin-bottom: 30px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 1px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+  align-items: center;
+}
+
+/*비밀번호 찾기 결과 모달 CSS */
+.findPwModal_box{
+  border : 1px solid #B5A27F;
+  border-radius : 5px;
+}
+
+.findPwModal_top{
+ width: 500px;
+ height: 40px;
+ background-color: #B5A27F;
+}
+
+.findPwModal_body{
+ margin: 40px auto 20px auto;
+ text-align: center;
+ font-weight: bold;
+}
+
+.findPwModal_body p {
+  font-size: 1.1rem;
+}
+
+.findPwModal_footer{
+  justify-content: center;
+  border: none;
+}
+
+.btnFindPwcheck{
+  width: 150px;
+  height: 40px;
+  margin-bottom: 30px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 1px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+  align-items: center;
+}

@@ -1,0 +1,123 @@
+#total_pwCheck{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#pwCheck_content{  
+  width: 1200px;
+  margin-bottom: 200px;
+}
+
+
+#pwCheck_top{
+  width: 500px;
+  height: 35px;
+  margin: 180px auto 0 auto;
+  background: #B5A27F;
+  border: 1px solid #B5A27F;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#pwCheck_bottom{
+  width: 500px;
+  justify-content: center;
+  margin: 0 auto;
+  border: 1px solid #B5A27F;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: center;
+}
+
+#pwCheck_wrap p { 
+ font-size : 1.5rem;
+ margin: 40px auto;
+}
+
+#pw_wrap {
+  margin: 10px auto;
+  width: 300px;
+  height: 40px;
+  display: flex;
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  border-left: 1px solid #FFFFFF;
+  border-radius: 5px;
+}
+
+#img_pwCheck_wrap01 {
+  background-color: #D8C6A6;
+  width: 16%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;	
+}
+
+#img_pwCheck {
+  width: 30px;
+  height: 30px;     
+}
+
+#img_pwCheck {
+  width: 30px;
+  height: 30px;     
+}
+
+#infoPw {
+  width: 84%;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+#pwCheck_btn{
+  margin: 50px auto;
+}
+#btnPwCheck{
+  width: 290px;
+  height: 40px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 1px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+}
+
+/*비밀번호 불일치 및 빈칸 모달 CSS */
+.updatePwModal_box{
+  border : 1px solid #B5A27F;
+  border-radius : 5px;
+}
+.updatePwModal_top{
+ width: 500px;
+ height: 40px;
+ background-color: #B5A27F;
+}
+.updatePwModal_body{
+ margin: 40px auto 20px auto;
+ text-align: center;
+ font-weight: bold;
+}
+.updatePwModal_body p {
+  font-size: 1.1rem;
+}
+.updatePwModal_footer{
+  justify-content: center;
+  border: none;
+}
+.btnUpdatePwcheck{
+  width: 150px;
+  height: 40px;
+  margin-bottom: 30px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 1px solid #B5A27F;
+  border-radius: 5px;
+  background: #B5A27F;
+  align-items: center;
+}

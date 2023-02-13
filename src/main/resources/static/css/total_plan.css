@@ -1,0 +1,267 @@
+
+/* *** CONTENT PART *** */
+#content_mypage {
+	width: 1070px;
+	padding: 30px 30px 30px 30px;
+	float: right;
+}
+
+/* *** TOTAL PLAN *** */
+#totalplanLeft {
+	width: 560px; height: 700px;
+	float: left;
+	padding: 10px 50px 10px 50px;
+}
+#totalplanRight {
+	width: 440px; height: 700px;
+	float: right;
+}
+
+#totalplanLeftCategory {
+	width: 400px; height: 50px;
+	background-color: #D8C6A6;
+	margin: 0 0 5px 0;
+}
+#totalplanLeftCategory h2 {
+	float: left;
+	margin-left: 20px;
+	margin-top: 12px;
+	font-size: 1.6rem;
+}
+#totalplanLeftCategory input {
+	height: 30px;
+	margin-top: 11px; margin-right: 15px;
+	float: right;
+	text-decoration: none;
+	border: 0;
+	border-radius: 5px;
+	background-color: #B5A27F;
+	font-size: 1em;
+	align-self: center;
+	color: white;
+	font-weight: bold;
+}
+#addCategory {
+	bottom: 20px;
+    position: fixed;
+    bottom: 0;
+    display: none;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 350px;
+    height: 370px;
+    overflow: hidden;
+    border: 1px solid #B5A27F; border-radius: 5px;
+    text-align: center;
+}
+#addCategory .addCategotyTr {
+	margin-bottom: 50px;
+	clear:both;
+	align-items: center;
+}
+#addCategory .addCategoryLeft {
+	float: left;
+	width: 110px; height: 30px;
+	line-height: 30px;
+	text-align: left;
+}
+#addCategory .addCategoryRight {
+	float: right;
+	width: 190px;  height: 30px;
+}
+#addCategory .addCategoryBtn input {
+	width: 110px; height: 35px;
+	border: 2px solid #B5A27F;
+	font-weight: bold;
+}
+.btnAddCategoryCancel {
+	color: #B5A27F;
+	background-color: white;
+}
+.btnAddCategorySubmit {
+	color: white;
+	background-color: #B5A27F;
+}
+
+#totalplanLeftCategoryContent {
+	clear: both;
+	width: 400px; height: 440px;
+	border: 1px solid black;
+	overflow: scroll;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+#totalplanLeftCategoryContent div {
+	font-size: 1.8rem;
+}
+#totalplanLeftCategoryContent div input {
+	width: 360px; height: 50px;
+	margin-bottom: 10px;
+	
+}
+
+#totalplanLeftTotalstudyhour {
+	width: 400px; height: 50px;
+	background-color: #D8C6A6;
+	margin: 0 0 30px 0;
+}
+#totalplanLeftTotalstudyhour h2 {
+	float: left;
+	margin-left: 20px;
+	margin-top: 12px;
+	font-size: 1.6rem;
+}
+#totalplanLeftTotalstudyhour span {
+	float: right;
+	margin-top: 12px; margin-right: 15px;
+	font-size: 1.6rem;
+	color: white;
+	
+}
+
+#totalplanLeftRank {
+	width: 400px; height: 50px;
+	background-color: #D8C6A6;
+	margin: 0 0 5px 0;
+}
+#totalplanLeftRank h2 {
+	float: left;
+	margin-left: 20px;
+	margin-top: 12px;
+	font-size: 1.6rem;
+}
+#totalplanLeftRank span {
+	float: right;
+	margin-top: 12px; margin-right: 15px;
+	font-size: 1.6rem;
+	color: white;
+}
+
+#totalplanRight {
+	padding: 10px 0 10px 0;
+}
+#totalplanRightDday {
+	width: 300px; height: 50px;
+	background-color: #D8C6A6;
+	margin: 0 0 5px 0;
+}
+#totalplanRightDday h2 {
+	float: left;
+	margin-left: 20px;
+	padding-top: 12px;
+	font-size: 1.6rem;
+}
+#totalplanRightDdayContent {
+	clear: both;
+	width: 300px; height: 150px;
+	border: 1px solid black;
+	overflow: scroll;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+#totalplanRightDdayContent div {
+	height: 25px;
+	line-height: 25px;
+	border: 1px solid black;
+	margin-bottom: 5px;
+}
+#totalplanRightDdayContent div span {
+	display: inline-block;
+}
+#totalplanRightDdayContent div .ddayContentDday {
+	width: 60px;
+	margin-left: 10px; 
+}
+
+#totalplanRightGoal {
+	width: 300px; height: 50px;
+	background-color: #D8C6A6;
+	margin: 0 0 5px 0;
+}
+#totalplanRightGoal h2 {
+	margin-left: 20px;
+	padding-top: 12px;
+	font-size: 1.6rem;
+}
+#totalplanRightGoalContent {
+	width: 300px; height: 150px;
+	border: 1px solid black;
+	overflow: scroll;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+#updateGoal {
+	bottom: 20px;
+    position: fixed;
+    bottom: 0;
+    display: none;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 350px;
+    height: 230px;
+    overflow: hidden;
+    border: 1px solid #B5A27F; border-radius: 5px;
+    text-align: center;
+}
+#updateGoal .addGoalTr {
+	margin-bottom: 50px;
+	clear:both;
+	align-items: center;
+}
+#updateGoal .addGoalLeft {
+	float: left;
+	width: 110px; height: 30px;
+	line-height: 30px;
+	text-align: left;
+}
+#updateGoal .addGoalRight {
+	float: right;
+	width: 190px;  height: 30px;
+}
+#updateGoal .addGoalBtn input {
+	width: 110px; height: 35px;
+	border: 2px solid #B5A27F;
+	font-weight: bold;
+}
+.radio {
+	line-height: 30px;
+}
+.planStatusL {
+	float: left;
+}
+.btnGoalCancel {
+	color: #B5A27F;
+	background-color: white;
+}
+.btnGoalSubmit {
+	color: white;
+	background-color: #B5A27F;
+}
+
+#totalplanRightClosed {
+	width: 300px; height: 50px;
+	background-color: #D8C6A6;
+	margin: 0 0 5px 0;
+}
+#totalplanRightClosed h2 {
+	margin-left: 20px;
+	padding-top: 12px;
+	font-size: 1.6rem;
+}
+#totalplanRightClosedContent {
+	width: 300px; height: 150px;
+	border: 1px solid black;
+	overflow: scroll;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+#totalplanRightClosedContent .closedContentTitle {
+	margin-left: 5px;
+}
+
+
+

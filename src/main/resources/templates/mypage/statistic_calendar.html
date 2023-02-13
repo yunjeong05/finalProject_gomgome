@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout_myplan}">
+	  
+	<!-- head 영역 시작 -->
+	<!-- 개별적으로 사용할 css, js 링크 걸기 위해 남겨둠 -->
+	<head>
+		<th:block layout:fragment="script">
+			
+			<script th:inline="javascript">
+
+			</script>
+		</th:block>
+	</head>
+	<!-- head 영역 끝 -->
+		
+	
+	<body>
+		
+		<!--div layout:fragment="content" id="content_mypage"-->
+		<div id="content_mypage">
+			<h2 style="height:100px;">통계-달력 페이지</h2>
+			<h3>년/월/일 입력 (ex. 2022/12/25, 미선택시 오늘 날짜)</h3>
+			<form action="/mypage/statistic_calendar" method="get">
+				<input type="text" name="scheduleYear">
+				<input type="text" name="scheduleMonth">
+				<input type="text" name="scheduleDate">
+				<button type="submit">선택</button>	
+			</form>
+			<h3>플랜</h3>
+			<table style="border: 1px solid black; border-collapse: collapse;">
+				<tr>
+					<th>번호</th>
+					<th>플랜이름</th>
+					<th>유저이름</th>
+					<th>시작일</th>
+					<th>마감일</th>
+				</tr>
+				<tr th:each="plan : ${planList}" style="border: 1px solid black; border-collapse: collapse;">
+					<td th:text="${plan.planNo}"></td>
+					<td th:text="${plan.planName}"></td>
+					<td th:text="${plan.userId}"></td>
+					<td th:text="${plan.planStartDay}"></td>
+					<td th:text="${plan.planEndDay}"></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	
+</html>

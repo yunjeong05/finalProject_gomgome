@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!-- head 영역 시작 -->
+<!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+<head>
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+		<link rel="stylesheet" th:href="@{/css/planCate.css}">
+		<link rel="stylesheet" th:href="@{/css/planCate_select.css}">
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+		<script th:src="@{/js/planCate.js}"></script>
+		<script th:inline="javascript">
+			const likePlanList = /*[[${likePlanList}]]*/;
+			const userCheck = /*[[${#authentication.principal}]]*/;					
+		</script>
+	</th:block>
+</head>
+<!-- head 영역 끝 -->
+
+<body>
+<div class="container" layout:fragment="content">
+<!--<div th:replace="/planner/planSidebar :: planSidebar"></div>-->
+<div class="main_content">
+	<div class="content-wrapper">
+  <div class="select_section">
+    <div class="select_section_wrpper">
+      <div class="select_title">카테고리별</div>
+      <select class="selectCate" id="selectCate">
+        <option value=0>전체</option>
+        <option value=1>시험</option>
+        <option value=2>자기개발</option>
+        <option value=3>운동</option>
+        <option value=4>취미</option>
+      </select>
+      <!--<div class="selectBtn">
+        <div class="btnWeek">주</div>
+        <div class="btnMonth">월</div>
+      </div>-->
+    </div>
+  </div>
+  <div class="planCate_main">
+	  <div class="swiper-title">누적 조회수 최다 플랜</div>
+	  <div class="swiper">
+	    <!-- Additional required wrapper -->
+	    <div class="swiper-wrapper" style="width: 80%;">
+	      <!-- Slides -->
+	      <div class="swiper-slide plan" th:each= "planViewCntMax : ${planViewCntMax}">
+	        <div class="plan_image" style="height: 70%;"><img src="/images/planCover.jpg" alt="표지이미지"></div>
+	        <div>
+	          <div class="plan_content_title"><a th:href="@{/planner/updatePlanCnt/{planNO}(planNO = ${planViewCntMax.planNo})}" 
+	          th:text="${planViewCntMax.planName}" onclick="window.open(this.href, '_blank', 'width=1100px, height=900px'); return false;"></a></div>
+	          <!--<div class="plan_content_userId">작성자</div>-->
+	          <div class="plan_content_cnt_like">
+		          <div class="plan_content_cnt" th:text="'조회수 ' + ${planViewCntMax.planViewCnt}"></div>
+		          <div class="plan_content_like_btn">
+			        <div class="plan_content_like_cnt" th:text="${planViewCntMax.planLikeCnt}"></div>
+		          	<img class="plan_content_like_img" th:name="${planViewCntMax.planNo}" th:attr="data=${planViewCntMax.planNo}" src="/images/like_no.png" alt="하트자리">
+	          </div>
+	      </div> 
+	        </div>
+	      </div>
+	    </div>
+	    <!-- If we need pagination -->
+	    <div class="swiper-pagination"></div>
+	    
+	    <!-- If we need navigation buttons -->
+	    <div class="swiper-button-prev"></div>
+	    <div class="swiper-button-next"></div>
+	    
+	    <!-- If we need scrollbar -->
+	    <!--<div class="swiper-scrollbar"></div>-->
+	  </div>
+	  
+	  <div class="swiper-title">여성 인기 플랜</div>
+	  <div class="swiper">
+	    <!-- Additional required wrapper -->
+	    <div class="swiper-wrapper">
+	      <!-- Slides -->
+	      <div class="swiper-slide plan" th:each= "planViewCntMaxFemale : ${planViewCntMaxFemale}">
+	        <div class="plan_image" style="height: 70%;"><img src="/images/planCover.jpg" alt="표지이미지"></div>
+	        <div>
+	          <div class="plan_content_title"><a th:href="@{/planner/updatePlanCnt/{planNO}(planNO = ${planViewCntMaxFemale.planNo})}" 
+	          th:text="${planViewCntMaxFemale.planName}" onclick="window.open(this.href, '_blank', 'width=1100px, height=900px'); return false;"></a></div>
+	          <!--<div class="plan_content_userId">작성자</div>-->
+	          <div class="plan_content_cnt_like">
+		          <div class="plan_content_cnt" th:text="'조회수 ' + ${planViewCntMaxFemale.planViewCnt}"></div>
+		          <div class="plan_content_like_btn">
+			        <div class="plan_content_like_cnt" th:text="${planViewCntMaxFemale.planLikeCnt}"></div>
+		          	<img class="plan_content_like_img" th:name="${planViewCntMaxFemale.planNo}" th:attr="data=${planViewCntMaxFemale.planNo}" src="/images/like_no.png" alt="하트자리">
+		          </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <!-- If we need pagination -->
+	    <div class="swiper-pagination"></div>
+	  
+	    <!-- If we need navigation buttons -->
+	    <div class="swiper-button-prev"></div>
+	    <div class="swiper-button-next"></div>
+	    
+	    <!-- If we need scrollbar -->
+	    <!--<div class="swiper-scrollbar"></div>-->
+	  </div>
+	  
+	  <div class="swiper-title">남성 인기 플랜</div>
+	  <div class="swiper">
+	    <!-- Additional required wrapper -->
+	    <div class="swiper-wrapper">
+	      <!-- Slides -->
+	      <div class="swiper-slide plan" th:each= "planViewCntMaxMale : ${planViewCntMaxMale}">
+	        <div class="plan_image" style="height: 70%;"><img src="/images/planCover.jpg" alt="표지이미지"></div>
+	        <div>
+	          <div class="plan_content_title"><a th:href="@{/planner/updatePlanCnt/{planNO}(planNO = ${planViewCntMaxMale.planNo})}" 
+	          th:text="${planViewCntMaxMale.planName}" onclick="window.open(this.href, '_blank', 'width=1100px, height=900px'); return false;"></a></div>
+	          <!--<div class="plan_content_userId">작성자</div>-->
+	          <div class="plan_content_cnt_like">
+		          <div class="plan_content_cnt" th:text="'조회수 ' + ${planViewCntMaxMale.planViewCnt}"></div>
+		          <div class="plan_content_like_btn">
+			        <div class="plan_content_like_cnt" th:text="${planViewCntMaxMale.planLikeCnt}"></div>
+		          	<img class="plan_content_like_img" th:name="${planViewCntMaxMale.planNo}" th:attr="data=${planViewCntMaxMale.planNo}" src="/images/like_no.png" alt="하트자리">
+		          </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <!-- If we need pagination -->
+	    <div class="swiper-pagination"></div>
+	  
+	    <!-- If we need navigation buttons -->
+	    <div class="swiper-button-prev"></div>
+	    <div class="swiper-button-next"></div>
+	  </div>
+  </div>
+  
+  <div th:replace="/planner/planCate_select :: planCate_select"></div>
+</div>
+</div>
+</div>
+</body>
+</html>

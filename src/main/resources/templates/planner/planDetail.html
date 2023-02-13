@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+<!-- head 영역 시작 -->
+<!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+<head>
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" th:href="@{/css/planDetail.css}">
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+		<script th:src="@{/js/planDetail.js}"></script>
+		<script th:inline="javascript">
+			const planScheduleDetail = /*[[${planScheduleDetail}]]*/;					
+			const planDetail = /*[[${planDetail}]]*/;	
+			const userCheck = /*[[${#authentication.principal}]]*/;			
+		</script>
+		<script>
+		 document.addEventListener('DOMContentLoaded', function() {
+			 //console.log(planScheduleDetail);
+			 	$("html").click(function() {
+					
+					$("#setOfBtnDetail").hide();
+				});
+				let selectScheduleType = null;
+				let selectScheduleContent = null;
+				let selectScheduleUrl = null;
+				let storageArray = new Array();
+			 
+			 	var startDay = planDetail.planStartDay;
+			 	var events =[];
+			 	for(i=0; i<planScheduleDetail.length; i++ ) {
+					 const planObj = {
+						title: planScheduleDetail[i].scheduleType + ": "+ planScheduleDetail[i].scheduleContent,
+						start: planScheduleDetail[i].scheduleStartTime,
+						end: planScheduleDetail[i].scheduleEndTime,
+						url: planScheduleDetail[i].scheduleSource
+					  };
+					events.push(planObj);
+				 }
+			    var calendarEl = document.getElementById('calendar');
+			
+			    var calendar = new FullCalendar.Calendar(calendarEl, {
+				  customButtons: {
+						timeGridDay: {
+							text: '첫번쨰 날',
+							click: function() {calendar.gotoDate( startDay )}
+						},
+				  },
+			      initialView: 'timeGridDay',
+			      headerToolbar: {
+			        left: 'timeGridDay',
+			        center: 'title',
+			        right: 'prev next'
+			      },
+			      initialDate: startDay,
+			      locale: "ko",
+			      eventClick: function(info) {
+					  
+					  if(userCheck == null || userCheck == 'anonymousUser') {
+						return;
+					  }
+					  
+					  info.jsEvent.preventDefault(); // don't let the browser navigate
+
+					  moveUrl = info.event.url;
+					  
+					  let mouseLeft = info.jsEvent.pageX;
+					  let mouseTop = info.jsEvent.pageY;
+					  
+					  
+					  
+				  	  $("#setOfBtnDetail").hide();
+				  	  
+				  	  setTimeout(function() {
+						if($("#setOfBtnDetail").css("display") == "none") {
+							//console.log(mouseLeft + ", " + mouseTop);
+							$("#setOfBtnDetail").show();
+							$("#setOfBtnDetail").css("left", mouseLeft+"px");
+							$("#setOfBtnDetail").css("top", mouseTop+"px");
+							
+							let tmpS = info.event.title.split(": ");
+							selectScheduleType = tmpS[0];
+							selectScheduleContent = tmpS[1];
+							selectScheduleUrl = info.event.url;
+						}
+				   	  }, 100);
+				  	  
+				  },
+			      events: events
+			    });
+			    $("#copyScheduleEvent").on("click", function() {
+					
+					let tmpObj = new Object();
+					
+					tmpObj.type = selectScheduleType;
+					tmpObj.content = selectScheduleContent;
+					tmpObj.url = selectScheduleUrl;
+					
+					if (localStorage.getItem("gomgome_copy_schedule") != null) {
+						storageArray = JSON.parse(localStorage.getItem("gomgome_copy_schedule"));				
+					}
+
+					/* storageArray에 tmpObj와 겹치는 게 존재하는 지 확인 */
+					
+					storageArray.push(tmpObj);
+					console.log(storageArray);
+					localStorage.setItem("gomgome_copy_schedule", JSON.stringify(storageArray));
+				});
+				$("#moveScheduleEvent").on("click", function() {
+					if (moveUrl) {
+					     window.open(moveUrl);
+					 } else {
+						 alert("등록된 url이 없습니다.");
+					 }
+					
+				});
+			    
+			
+			    var firstDay = calendar.render();
+			    
+			    /*events.forEach(function(number, index) {
+					
+					console.log(number.start) = 
+				})*/
+			    
+			    //$(".fc-next-button").attr("id", "my-button" )
+			    $(".fc-button").on("click", function()	{
+					var date = calendar.getDate();
+				    var year = date.getFullYear();
+				    var month = date.getMonth()+1;
+				    var day = date.getDate();
+				    if(month<9) {
+						month = '0' + (date.getMonth()+1)
+					}
+				    if(day<9) {
+						day = '0' + (date.getYear());
+					}
+					var scheduleStartDay = year +'-'+ month +'-'+day
+				    var planNo = planDetail.planNo
+				    //console.log(planNo)
+					$.ajax({
+						url: planNo + '/' + scheduleStartDay,
+						type: 'get',
+						success: function(obj) {
+							
+							let htmlStr = "";
+							$(".lctr_content_wrapper").html(htmlStr);
+						    $(".siteURL_content_wrapper").html(htmlStr);
+						    $(".todo_content_wrapper").html(htmlStr);
+						  	//console.log(obj.items.length)
+						  	if(obj.items.length>0){
+							console.log(obj.items);
+							  	for(let i=0; i<obj.items.length>0; i++) {
+									  //console.log(obj.items[i].scheduleType)
+									htmlStr = `
+									  	<div>
+							              <li>${obj.items[i].scheduleContent}</li>
+							            </div>
+									  	`;		
+								  	console.log(htmlStr);
+									if(obj.items[i].scheduleType =='강의'){
+										console.log("강의 확인")
+									 	$(".lctr_content_wrapper").append(htmlStr);	
+									} else if(obj.items[i].scheduleType =='참고사이트') {
+										console.log("참고 확인")
+									 	$(".siteURL_content_wrapper").append(htmlStr);																
+									} else if(obj.items[i].scheduleType =='기타') {
+										console.log("기타 확인")
+									 	$(".todo_content_wrapper").append(htmlStr);		
+									}
+							 	}
+							  } else {
+								  htmlStr += `
+											  	<div>
+									              <li>등록된 내용이 없습니다.</li>
+									            </div>
+											  	`;	
+								  $(".lctr_content_wrapper").html(htmlStr);
+								  $(".siteURL_content_wrapper").html(htmlStr);
+								  $(".todo_content_wrapper").html(htmlStr);
+							  }
+						},
+						error: function(e) {
+							console.log(e);
+						}
+					});
+				})
+				
+			});
+		</script>
+	</th:block>
+</head>
+<!-- head 영역 끝 -->
+
+<body>
+<div id="planUserInfo">
+	
+    <div class="planUserInfoTitle" th:text="${planDetail.planName}">플래너 이름</div>
+    <div class="planUserInfoUserId" th:text="${planDetail.userId}">유저</div>
+  </div>
+  <div id='planDetail'>
+    <div id="planCalendarWrapper">
+      <div id='calendar'></div>
+      <div class="todoList siteURL">
+        <div class="siteURLWrapper">
+          <div class="siteURL_title"><span>참고사이트</span></div>
+          <div class="siteURL_content_wrapper">
+            <div th:each="list1 : ${planScheduleDetail}">
+              <li th:if="${#dates.format(new java.util.Date(list1.startDate),'YYYY-MM-dd') == #dates.format(new java.util.Date(list1.scheduleStartTime),'yyyy-MM-dd') 
+              			&& list1.scheduleType == '참고사이트'}" th:text="${list1.scheduleContent}">
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id='todoList'>
+      <div class="todoList lctr">
+        <div class="lctrWrapper">
+          <div class="lctr_title"><span>강의 목록</span></div>
+          <div class="lctr_content_wrapper">
+            <div th:each="list1 : ${planScheduleDetail}">
+              <li th:if="${#dates.format(new java.util.Date(list1.startDate),'YYYY-MM-dd') == #dates.format(new java.util.Date(list1.scheduleStartTime),'yyyy-MM-dd') 
+              			&& list1.scheduleType == '강의'}" th:text="${list1.scheduleContent}">
+      			<th:block />
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="todoList todo">
+        <div class="todoWrapper">
+          <div class="todo_title"><span>계획한 일</span></div>
+          <div class="todo_content_wrapper">
+            <div th:each="list1 : ${planScheduleDetail}">
+              <li th:if="${#dates.format(new java.util.Date(list1.startDate),'YYYY-MM-dd') == #dates.format(new java.util.Date(list1.scheduleStartTime),'yyyy-MM-dd') 
+              			&& list1.scheduleType == '기타'}" th:text="${list1.scheduleContent}">
+      			
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="setOfBtnDetail">
+	    <button type="button" id="copyScheduleEvent">일정복사</button><br>
+	    <button type="button" id="moveScheduleEvent">링크이동</button>
+    </div>
+  </div>
+</body>
+</html>

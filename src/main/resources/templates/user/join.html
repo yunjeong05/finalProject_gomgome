@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	
+	<head>
+		<th:block layout:fragment="css">
+
+		</th:block>
+		<th:block layout:fragment="script">
+			<script th:src="@{/js/join.js}"></script>
+		</th:block>
+	</head>
+		
+	<body>
+		<div layout:fragment="content">
+		  <div id="total_join">
+		    <form id="joinForm" action="/user/join" method="post">
+		    	<input type="hidden" name="userBirthday" id="userBirthday">
+		    	<input type="hidden" name="cateArray" id="cateArray">
+		    	<input type="hidden" name="userEmail" id="emailArray">
+ 		      <div id="join_box">
+		        <div class="join_label_wrapper">
+		            <label for="userId">아이디</label>
+		        </div>
+		        <div>
+		          <input type="text" id="userId" name="userId" placeholder="아이디를 입력하시오." th:value="${socialUser != null ? socialUser.userId : ''}" th:readonly="${socialUser}">
+		          <button type="button" id="btnIdCheck">중복확인</button>
+		        </div>
+		        <p id="idValidation" style="color: red; font-size: 0.8rem;">
+		          아이디는 영문,숫자 포함 6글자 이상으로 설정해주세요.
+		        </p>
+		        <div class="join_label_wrapper">
+		          <label for="userPw">비밀번호</label>
+		        </div>
+		        <div id="join_section01">
+		          <input type="password" id="userPw" name="userPw" placeholder="비밀번호를 입력하시오.">
+		          <div id="join_img_pw_wrap01">
+		            <img src="/images/eye02.png" id="join_img01_eye02">
+		            <img src="/images/eye01.png" id="join_img01_eye01">
+		          </div>
+		        </div>
+		        <p id="pwValidation" style="color: red; font-size: 0.8rem;">
+		          비밀번호는 대소문자, 숫자, 기호(!@#$%^&*) 포함 6글자 이상으로 설정해주세요.
+		        </p>
+		        <div class="join_label_wrapper">
+		          <label for="userPwCheck">비밀번호 확인</label>
+		        </div>
+		        <div id="join_section02">
+		          <input type="password" id="userPwCheck" name="userPwCheck" placeholder="비밀번호를 다시 입력하시오.">
+		          <div id="join_img_pw_wrap02">
+		            <img src="/images/eye02.png" id="join_img02_eye02">
+		            <img src="/images/eye01.png" id="join_img02_eye01">
+		          </div>
+		        </div>
+		        <p id="pwCheckResult" style="font-size: 0.8rem;"></p>
+		        <div class="join_label_wrapper">
+		          <label for="userName">이름</label>
+		        </div>
+		        <input type="text" id="userName" name="userName" placeholder="이름을 입력하시오." >
+		        <div class="join_label_wrapper">
+		          <label for="userNickname">닉네임</label>
+		        </div>
+		        <div>
+		          <input type="text" id="userNickname" name="userNickname" placeholder="닉네임을 입력하시오.">
+		          <button type="button" id="btnNicknameCheck">중복확인</button>
+		        </div>
+		        <p id="nicknameValidation" style="color: red; font-size: 0.8rem;">
+		          닉네임은 한글, 영대소문자, 숫자 3자리 이상으로 설정해주세요.
+		        </p>
+		        <div id="join_userGender_box">
+		          <div class="join_label_wrapper">
+		            <label for="userGender">성별&emsp;</label>   
+		          </div>
+		          <div class="join_userGender_radio"> 
+		          <input type="radio" id="male" name="userGender" value="male" checked>&ensp;<label for="male">남자</label>&ensp;
+		          <input type="radio" id="female" name="userGender" value="female">&ensp;<label for="female">여자</label>
+		          </div>
+		        </div>
+		        <div class="join_label_wrapper">
+		          <label for="join_birthday_box">생년월일</label>
+		        </div>
+		        <div id="join_birthday_box">
+		          <select name="yy" id="year"></select>년
+		          <select name="mm" id="month"></select>월
+		          <select name="dd" id="day"></select>일
+		        </div>
+		        
+		        <div class="join_label_wrapper">
+		          <label for="userTel">전화번호</label>
+		        </div>
+		        <input type="text" id="userTel" name="userTel" placeholder="최대12자리로 숫자만 작성해주세요.">
+		        <div class="join_label_wrapper">
+		          <label for="str_email01">이메일</label>
+		        </div>
+		        <input type="text" id="str_email01" name="str_email01" th:value="${socialUser != null ? #strings.arraySplit(socialUser.userId, '@')[0] : ''}"><span id="str_email02"> @</span>
+		        <input type="text" name="str_email03" id="str_email03" th:value="${socialUser != null ? #strings.arraySplit(socialUser.userId, '@')[1] : ''}">
+		        <select name="selectEmail" id="selectEmail">
+		          <option value="1" disabled selected>이메일선택</option>
+		          <option value="naver.com" name="email" th:selected="${socialUser != null && #strings.arraySplit(socialUser.userId, '@')[1] == 'naver.com'}">naver.com</option>
+		          <option value="daum.net" name="email" th:selected="${socialUser != null && #strings.arraySplit(socialUser.userId, '@')[1] == 'daum.net'}">daum.net</option>
+		          <option value="gmail.com" name="email" th:selected="${socialUser != null && #strings.arraySplit(socialUser.userId, '@')[1] == 'gmail.com'}">gmail.com</option>
+		          <option value="2" name="email">직접입력</option>
+		        </select>
+		        <p id="join_email_text">아이디, 비밀번호를 찾기위해 사용되니 정확하게 입력해주십시오.</p>
+		        <p id="emailCheckResult">이메일형식(com, net)에 맞지 않습니다. 다시 작성해주세요.</p>
+		        <div id="join_Next_box">
+		          <button type="button" id="BtnjoinNext">다음</button>
+		        </div>
+		      </div>
+		      <div id="total_join_interest" style="display:none;">
+		        <div id="interest_title_box">
+		          <p id="interest_title">관심사</p>
+		        </div>       
+		        <div id="join_interest">
+		          <div class="join_position">
+		            <div class="join_checkbox">
+		              <input type="checkbox" name="maincategoryNo" id="Join_test" value="1" style="display: none;"><label for="Join_test">시험</label>
+		            </div>
+		            <div class="join_interest_details" id="join_span_box01">
+		              <span class="join_span">수능, 각종 고시, 공채 시험, TOEIC, HSK, JLPT, 직무관련 자격증 등</span>
+		            </div>
+		          </div>
+		          <div class="join_position">
+		            <div class="join_checkbox">
+		              <input type="checkbox" name="maincategoryNo" id="Join_study" value="2" style="display: none;"><label for="Join_study">자기개발</label>
+		            </div>
+		            <div class="join_interest_details" id="join_span_box02">
+		              <span class="join_span">제2외국어, 독서, 시사, 경제, 직무관련 지식 등</span>
+		            </div>
+		          </div>
+		          <div class="join_position">
+		            <div class="join_checkbox">
+		              <input type="checkbox" name="maincategoryNo" id="Join_hobby" value="3" style="display: none;"><label for="Join_hobby">취미</label>
+		            </div>
+		            <div class="join_interest_details" id="join_span_box03">
+		              <span class="join_span">봉사활동, 글쓰기, 그림그리기, 전시회 관람, 유튜브·SNS·블로그 활동 등</span>
+		            </div>
+		          </div>
+		          <div class="join_position">
+		            <div class="join_checkbox">
+		              <input type="checkbox" name="maincategoryNo" id="Join_exrcise" value="4" style="display: none;"><label for="Join_exrcise">운동</label>
+		            </div>
+		            <div class="join_interest_details" id="join_span_box04">
+		              <span class="join_span">다이어트, 필라테스, 수영, 산책, 달리기, 마라톤, 농구, 탁구 등</span>
+		            </div>
+		          </div> 
+		        </div>
+		        <div id="btns_join" style="display:none;">
+		          <div id="join_wrap_befoe">
+		            <button type="button" id="BtnJoinBofore">이전으로</button>
+		          </div>
+		          <div id="join_wrap_conform">
+		            <button type="submit" id="BtnJoinConfirm">회원가입완료</button>
+		          </div>
+		        </div>     
+		      </div>
+		    </form>
+		  </div>
+		  <!--회원가입 성공 모달--> 
+		 <div id="myModal" class="modal fade ModalBox joinSuccessModal" tabindex="-1">
+		    <div class="modal-dialog">
+		        <div class="modal-content joinSuccessModal_box">
+		            <div class="modal-header joinSuccessModal_top">
+		                <h5 class="modal-title"></h5>
+		                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		            </div>
+		            <div class="modal-body joinSuccessModal_body">
+		                <p id="joinText"></p>
+		            </div>
+		            <div class="modal-footer joinSuccessModal_footer">
+		                <button type="button" class="btnJoinCheck">확 인</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>			  	
+		</div>
+	</body>
+</html>

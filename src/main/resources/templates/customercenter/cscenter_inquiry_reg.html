@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko"
+   xmlns:th="http://www.thymeleaf.org"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{layouts/layout}">
+   
+
+   <!-- head 영역 시작 -->
+   <!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+   <head>
+      <th:block layout:fragment="css">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+         <link rel="stylesheet" th:href="@{/css/cscenter_inquiry.css}">
+      </th:block>
+      <th:block layout:fragment="script">
+         <script th:inline="javascript" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+         <script th:src="@{/js/common.js}"></script>
+         
+         <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+	
+
+      </th:block>
+   </head>
+   <!-- head 영역 끝 -->
+  
+   
+   
+   <body id="wrap">   
+   <div layout:fragment="content">
+    <div id="inquiry">
+        <div class="wrap">
+            <div class="title">문의사항 등록</div> <br>
+
+            <div id="check">
+				<input id="secretCheck" type="checkbox">&emsp; 비밀글&emsp;
+			</div>
+            <br><br>
+
+            <div class="form">
+                <ul>
+                    <li>
+                        <dl class="w33p">
+                            <dt>번호</dt>
+                            <dd><input type="text" value="${questionNo}" style="border: none;" readonly></dd>
+                        </dl>
+                        <dl class="w33p">
+                            <dt>작성자</dt>
+                            <dd><input type="text" value="${userId}" style="border: none;" readonly></dd>
+                        </dl>
+                        <dl class="w33p">
+                            <dt>등록일</dt>
+                            <dd><input type="text" value="${questionRegdate}" style="border: none;" readonly></dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl class="w33p">
+                            <dt>문의유형</dt>
+                            <dd><input type="text" value="${questionType}" style="border: none;"> </dd>
+                        </dl>
+                        <dl class="w66p">
+                            <dt>제목</dt>
+                            <dd><input type="text" value="${questionTitle}" style="border: none;"></dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl class="w100p">
+                            <dt>내용</dt>
+                            <dd><span class="textarea" value="${questionContent}"></span></dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl class="w100p">
+                            <dt>첨부파일</dt>
+                            <dd><span class="answer"><div class="file">
+                                <span class="text"></span>
+                                <label class="attach"><input type="file">첨부파일 추가</label>
+                            </div></span></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="button">
+                
+                <div class="fr">
+                    <a href="#" class="btn btn_01 modalOpen" data-modal="pop_submit" >등록</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pop_submit" class="modal-container">
+        <div class="modal-wrapper">
+            <div class="head">
+                <a href="javascript:;" class="modalClose"><img src="/images/icon_close.png"></a>
+            </div>
+            <div class="cont">
+                <div class="text">문의사항이 등록되었습니다.</div>
+                <div class="button">
+                    <a href="javascript:;" class="btn btn_01 modalClose">확인</a>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+</body>
+</html>

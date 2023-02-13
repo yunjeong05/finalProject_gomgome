@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout_myplan}">
+	  
+	<!-- head 영역 시작 -->
+	<!-- 개별적으로 사용할 css, js 링크 걸기 위해 남겨둠 -->
+	<head>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				const planList = /*[[${planList}]]*/;
+				const scheduleMap = /*[[${scheduleMap}]]*/;
+				
+				const focusDate = /*[[${focusDate}]]*/;  	
+			</script>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js" charset = "UTF-8"></script>
+			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<script th:src="@{/js/todo_date.js}"></script>
+			<script th:src="@{/fullcalendar-6.0.3/dist/index.global.js}"></script>
+
+		</th:block>
+		<th:block layout:fragment="css">
+			
+			<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+			<link rel="stylesheet" th:href="@{/css/todo_date.css}">
+		</th:block>
+	</head>
+	<!-- head 영역 끝 -->
+	
+	<body>
+		<div layout:fragment="content" id="content_mypage">
+			<div id="tododateLeft">
+				<form id="formTodoDate" action="/mypage/todo_date" method="get">
+					<input type="hidden" id="scheduleYearto" name="scheduleYear">
+					<input type="hidden" id="scheduleMonthto" name="scheduleMonth">
+					<input type="hidden" id="scheduleDateto" name="scheduleDate">
+					<input type="text" id="inTodoCalendar" style="margin-bottom: 5px;" readonly>
+				</form>
+				<div id="todoCalendar"></div>
+			</div>
+			
+			<div id="tododateRight">
+				<div id="tododateTotalstudyTop">
+					<span id="tododateTotalstudyTitle">계획한 총 공부 시간: </span><span id="tododateTotalstudyContent"></span>
+				</div>
+				<div id="tododatePlanTop">
+					<span id="tododatePlanTitle">진행중인 플랜: </span><span id="tododatePlanContent"></span>
+				</div>
+				<div>
+					<div id="todoRightContent">
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+</html>

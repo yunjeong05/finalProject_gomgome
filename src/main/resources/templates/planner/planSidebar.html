@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+<!-- head 영역 시작 -->
+<!-- 개별적으로 사용할 css, js 링크를 걸기위해서 head를 남겨놓음 --> 
+<head>
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" th:href="@{/css/planSidebar.css}">
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:src="@{/js/planSidebar.js}"></script>
+	</th:block>
+</head>
+<!-- head 영역 끝 -->
+
+<body>
+<nav class="planSidebar" th:fragment="planSidebar">
+		<div class="text">
+            Planner
+         </div>
+         <ul class="sidemenu_wrapper">
+            <li class="sidemenu cate">
+               <a href="#" class="feat-btn">카테고리별
+               <span class="fas fa-caret-down first"></span>
+               </a>
+               <ul class="feat-show">
+                  <li class="sidesubmenu"><a href="#">시험</a></li>
+                  <li class="sidesubmenu"><a href="#">운동</a></li>
+                  <li class="sidesubmenu"><a href="#">자기개발</a></li>
+                  <li class="sidesubmenu"><a href="#">취미</a></li>
+               </ul>
+            </li>
+            <li class="sidemenu rank">
+               <a href="#" class="serv-btn">순위별
+               </a>
+            </li>
+         </ul>
+</nav>
+</body>
+</html>

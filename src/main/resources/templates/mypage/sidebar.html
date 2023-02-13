@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+	<!-- head 영역 시작 -->
+	<!-- 개별적으로 사용할 css, js 링크 걸기 위해 남겨둠 -->
+	<head>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+				$(function() {
+					console.log("sidebar");
+				});
+			</script>
+		</th:block>
+	</head>
+	<!-- head 영역 끝 -->
+		
+	
+	<body>
+	<nav th:fragment="sidebar" id="sidebar_mypage">
+		<div class="myPageTitle">
+			My Page
+		</div>
+		<script>
+			let tmpDateSidebar = new Date();
+			
+			$(function() {
+
+				function leftPad(value) {
+				    if (value >= 10) {
+				        return value;
+				    }
+				
+				    return `0${value}`;
+				}
+				
+				function toStringByFormatting(source, delimiter = '-') {
+				    const year = source.getFullYear();
+				    const month = leftPad(source.getMonth() + 1);
+				    const day = leftPad(source.getDate());
+				
+				    return [year, month, day].join(delimiter);
+				}
+				
+				let todayS = toStringByFormatting(tmpDateSidebar);
+				console.log("todayS: " + todayS);
+				
+				
+			});
+			
+			function tmpF() {
+/*				
+				$("#scheduleYear").val(tmpDateSidebar.getYear() + 1900);
+				$("#scheduleMonth").val(String(tmpDateSidebar.getMonth() + 1).padStart(2, "0"));
+				$("#scheduleDate").val(String(tmpDateSidebar.getDate()).padStart(2, "0"));
+*/
+				$("#scheduleYear").val(String(tmpDateSidebar.getYear() + 1900));
+				$("#scheduleMonth").val(String(tmpDateSidebar.getMonth() + 1));
+				$("#scheduleDate").val(String(tmpDateSidebar.getDate()));
+								
+				$("#sidebarFormTododate").submit();
+			}
+		</script>
+		<ul class="sidebarWrapper">
+			<li class="sidebarMenu">
+				<a th:href="@{/mypage/total_plan}" class="menu" id="btnTotalPlan">전체 계획</a>
+			</li>
+			<li class="sidebarMenu">
+				<!--a th:href="@{/mypage/todo_date(today=|${todayS}|)}" class="menu" id="btnTodoDate"-->
+				<a href="javascript:tmpF();" class="menu" id="btnTodoDate">
+					<form id="sidebarFormTododate" action="/mypage/todo_date" method="get">
+						<input type="hidden" id="scheduleYear" name="scheduleYear">
+						<input type="hidden" id="scheduleMonth" name="scheduleMonth">
+						<input type="hidden" id="scheduleDate" name="scheduleDate">
+					</form>
+					오늘의 할 일
+				</a> 
+				<!--ul th:each="plan : ${planUsersList}" class="todoDateSub">
+					<li class="todoDateSubMenu" th:text="${plan.planName}"></li>
+				</ul-->
+			</li>
+			<!--li class="sidebarMenu">
+				<a th:href="@{/mypage/closed}" class="menu" id="btnClosed">
+					지난 플랜들
+				</a>
+				<!--ul th:each="plan : ${planUsersList}" class="closedSub">
+					<li class="closedSubMenu" th:text="${plan.planName}"></li>
+				</ul-->
+			</li-->
+			<!--li class="sidebarMenu">
+				<a th:href="@{/mypage/statistic_calendar}" class="menu" id="btnStatistic">
+					통계
+				</a>
+				<ul class="statisticSub">
+					<li class="statisticSubMenu"><a href="#">달력</a></li>
+                  	<li class="statisticSubMenu"><a href="#">그래프</a></li>
+				</ul>
+			</li-->
+			<li class="sidebarMenu">
+				<a th:href="@{/mypage/like_plan}" class="menu" id="btnLikePlan">찜한 플랜</a>
+			</li>
+			<li class="sidebarMenu">
+				<a th:href="@{/mypage/my_note}" class="menu" id="btnNote">내 노트</a>
+			</li>
+		</ul>
+		
+	</nav>
+	</body>
+	
+</html>

@@ -1,0 +1,39 @@
+* {
+	margin: 0;
+}
+body {
+	width: 400px;
+	height: 270px;
+	margin: 0 auto;
+}
+.stopwatch {
+	width: 100%;
+	height: 100%;
+	background-image: url("/images/stopwatch_detail.png");
+    background-size: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .time-wrapper {
+    text-align: center;
+    height: 100px;
+    line-height: 180px;
+  }
+  #time {
+	font-size: 50px;
+	color: #333;
+  }
+  .btn-wrapper {
+	margin-top: 50px;
+    display: flex;
+  }
+  .btn-wrapper > div {
+    margin: 10px;
+  }
+  .btn>img {
+	width: 70%;
+  }
+  .play {
+	padding-left: 110px;
+  }
