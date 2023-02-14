@@ -114,8 +114,7 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public List<CamelHashMap> getSearchCommunityList(Community community) {
 		// TODO Auto-generated method stub
-		//return communityRepository.getSearchCommunityList(community.getSearchKeyword());
-		return null;
+		return communityRepository.getSearchCommunityList(community.getSearchKeyword());
 	}
 
 
